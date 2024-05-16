@@ -54,7 +54,7 @@ void Controller::startGame(sf::RenderWindow& window,bool load, bool& musicOn)
 	while (!m_levelOver || Stick::getCount() == 0)
 	{
 		print(window);
-		//windowPollEvent(window, musicOn);
+		windowPollEvent(window, musicOn);
 
 		const auto deltaTime = clock.restart();
 
@@ -63,25 +63,25 @@ void Controller::startGame(sf::RenderWindow& window,bool load, bool& musicOn)
 
 }
 
-////----------------------------------------------------------------------------------------
-////This function is responsible of handeling the different poll events
-//
-//void Controller::windowPollEvent(sf::RenderWindow& window, bool& musicOn)
-//{
-//	if (auto event = sf::Event{}; window.pollEvent(event))
-//	{
-//		switch (event.type)
-//		{
-//		case sf::Event::Closed:
-//			window.close();
-//			break;
-//		case sf::Event::MouseButtonReleased:
-//			handleClick(event.mouseButton, window, musicOn);
-//			break;
-//		}
-//	}
-//}
-//
+//----------------------------------------------------------------------------------------
+//This function is responsible of handeling the different poll events
+
+void Controller::windowPollEvent(sf::RenderWindow& window, bool& musicOn)
+{
+	if (auto event = sf::Event{}; window.pollEvent(event))
+	{
+		switch (event.type)
+		{
+		case sf::Event::Closed:
+			window.close();
+			break;
+		case sf::Event::MouseButtonReleased:
+			handleClick(event.mouseButton, window, musicOn);
+			break;
+		}
+	}
+}
+
 
 //----------------------------------------------------------------------------------------
 void Controller::print(sf::RenderWindow& window)
@@ -187,16 +187,16 @@ void Controller::print(sf::RenderWindow& window)
 //	printFeedback(*HandleResources::instance().getScreenTexture(S_GAMEOVER), window, background, G_LOST);
 //}
 //
-////----------------------------------------------------------------------------------------
-//void Controller::handleClick(const sf::Event::MouseButtonEvent& event,
-//	sf::RenderWindow& window, bool& musicOn)
-//{
-//	auto location = window.mapPixelToCoords({ event.x,event.y });
-//
+//----------------------------------------------------------------------------------------
+void Controller::handleClick(const sf::Event::MouseButtonEvent& event,
+	sf::RenderWindow& window, bool& musicOn)
+{
+	auto location = window.mapPixelToCoords({ event.x,event.y });
+
 //	m_infoBar.handleClick(location, m_gameOver, m_levelOver, m_mouse, musicOn);
-//
-//}
-//
+
+}
+
 //----------------------------------------------------------------------------------------
 void Controller::updateInfoBar(bool& musicOn)
 {

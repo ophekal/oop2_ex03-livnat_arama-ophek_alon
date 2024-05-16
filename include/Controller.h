@@ -27,7 +27,7 @@ private:
 
 
 	void startGame(sf::RenderWindow& window, bool load, bool& musicOn);
-	//void windowPollEvent(sf::RenderWindow& window, bool& musicOn);
+	void windowPollEvent(sf::RenderWindow& window, bool& musicOn);
 	void print(sf::RenderWindow& window);
 	/*void printFeedback(const sf::Texture& feedback, sf::RenderWindow& window,
 		const sf::Sprite& background, GameSound sound)const;
@@ -39,8 +39,8 @@ private:
 	void moveMouse(sf::Time deltaTime);
 	void moveCats(sf::Time deltaTime);
 	void handleLevelOver(sf::RenderWindow& window, const sf::Sprite& background, bool& musicOn);
-	void handleExit(sf::RenderWindow& window, const sf::Sprite& background);
-	void handleClick(const sf::Event::MouseButtonEvent& event, sf::RenderWindow& window, bool& musicOn);*/
+	void handleExit(sf::RenderWindow& window, const sf::Sprite& background);*/
+	void handleClick(const sf::Event::MouseButtonEvent& event, sf::RenderWindow& window, bool& musicOn);
 	void updateInfoBar(bool& musicOn);
 	//void printFinalScore(sf::RenderWindow& window);
 };
