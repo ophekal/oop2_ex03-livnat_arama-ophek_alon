@@ -1,0 +1,25 @@
+﻿#configure_file ("Wall.png" ${CMAKE_BINARY_DIR} COPYONLY)
+
+
+configure_file ("blackStick.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("blueStick.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("greenStick.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("redStick.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("yellowStick.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("exitButton.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("menu.jpg" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("startGame.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("boardBackground.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("music.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("mute.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("gameRules.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("hintButton.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("loadGame.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("startGame.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("exitButton.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("gameRulesWindow.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("time.png" ${CMAKE_BINARY_DIR} COPYONLY)
+
+configure_file ("gameMusic.wav" ${CMAKE_BINARY_DIR} COPYONLY)
+
+configure_file ("font.ttf" ${CMAKE_BINARY_DIR} COPYONLY)

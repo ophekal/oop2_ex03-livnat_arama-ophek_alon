@@ -1,0 +1,37 @@
+
+#pragma once
+#include <SFML/Graphics.hpp>
+#include <fstream>
+#include <map>
+#include <list>
+#include "HandleResources.h"
+#include "Stick.h"
+
+class Controller;
+
+
+class Board
+{
+public:
+	Board();
+	void readTheLevelAndUpdateData(Controller& controller, bool load);
+	//void updateBoard();
+	void printBoard(sf::RenderWindow& window);
+	//void clear();
+	//void reset();
+	void loadAndRunFromExisting(Controller& controller);
+	void generateGame(Controller& controller) const;
+	void updateControllerData(Controller& controller, float time, int score) const;
+	void addStickToList(StickType colour, float angle, int len, float x, float y);
+	//void updateSticksList(auto needToRemoveIt);
+	void updateRemoveable();
+	//void deleteStick(auto needToRemoveIt);
+
+private:
+
+	sf::RectangleShape m_board;    // for the background
+	std::list<Stick> m_sticks;
+	std::multimap<int, Stick*> m_removeable;
+
+};
+
