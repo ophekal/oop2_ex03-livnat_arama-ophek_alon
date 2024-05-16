@@ -80,10 +80,10 @@ const sf::Vector2f BUTTON_SIZE = { 400,100 };
 const sf::Vector2f SOUND_SIZE = { 65,65 };
 
 //------------board------------
-const float BOARD_HIG = 1000;
-const float BOARD_WID = 1000;
+const float BOARD_HIG = 950;
+const float BOARD_WID = 1050;
 const float BOARD_START_X = 450;
-const float BOARD_START_Y = 50;
+const float BOARD_START_Y = 0;
 
 //----------infoBar-------------
 

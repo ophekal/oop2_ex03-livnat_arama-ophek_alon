@@ -13,7 +13,7 @@
 
 //-------------------------------------------------------------------------------------
 Board::Board()
-	: m_board(sf::Vector2f(BOARD_HIG, BOARD_WID))
+	: m_board(sf::Vector2f(BOARD_WID, BOARD_HIG))
 {
 	m_board.setPosition({ BOARD_START_X ,BOARD_START_Y });
 	m_board.setTexture(HandleResources::instance().getBackgroundTexture(B_BOARD));
