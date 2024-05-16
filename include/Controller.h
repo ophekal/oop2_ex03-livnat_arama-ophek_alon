@@ -41,6 +41,8 @@ private:
 	void handleLevelOver(sf::RenderWindow& window, const sf::Sprite& background, bool& musicOn);
 	void handleExit(sf::RenderWindow& window, const sf::Sprite& background);*/
 	void handleClick(const sf::Event::MouseButtonEvent& event, sf::RenderWindow& window, bool& musicOn);
+	void handleClickBoard(const sf::Vector2f& location);
+	void handleClickInfoBar(const sf::Vector2f& location);
 	void updateInfoBar(bool& musicOn);
 	//void printFinalScore(sf::RenderWindow& window);
 };
