@@ -2,13 +2,18 @@
 #include <cmath>
 #include <numbers>
 
+
 //---------------------------------------------------------------------------------------
 int Stick::m_count = 0;
 //---------------------------------------------------------------------------------
 Stick::Stick(const sf::Texture* picture, Colour colour, float angle, const sf::Vector2f& start, float len)
 	  :m_colour(colour), m_angle(angle), m_startingPoint(start), m_length(len)
 {
+    float pixelLength = m_length *30.0f;
+    float pixelWidth = 30.0f;
+
     m_stick.setTexture(picture);
+    m_stick.setSize(sf::Vector2f(pixelLength, pixelWidth));
     m_stick.setPosition(start);
     m_count++;
 }
@@ -26,6 +31,10 @@ int Stick::getCount()
 //----------------------------------------------------------------------------------------
 void Stick::draw(sf::RenderWindow& window)
 {
+    //// Print stick attributes for debugging
+    //std::cout << "Stick position: " << m_stick.getPosition().x << ", " << m_stick.getPosition().y << std::endl;
+    //std::cout << "Stick rotation: " << m_angle << std::endl;
+
     // Rotate the rectangle
     m_stick.setRotation(m_angle);
     window.draw(m_stick);

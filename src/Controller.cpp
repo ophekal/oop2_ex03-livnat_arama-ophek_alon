@@ -56,7 +56,7 @@ void Controller::startGame(sf::RenderWindow& window,bool load, bool& musicOn)
 		print(window);
 		windowPollEvent(window, musicOn);
 
-		const auto deltaTime = clock.restart();
+		//const auto deltaTime = clock.restart();
 
 		updateInfoBar(musicOn);
 	}
