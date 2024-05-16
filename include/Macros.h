@@ -24,7 +24,8 @@ enum Background
 	B_LOAD,
 	B_GAMERULES,
 	B_SOUND,
-	B_MUTE
+	B_MUTE,
+	B_INFOBAR
 };
 
 enum MenuButton
@@ -86,6 +87,10 @@ const float BOARD_START_X = 450;
 const float BOARD_START_Y = 0;
 
 //----------infoBar-------------
+const float INFO_HIG = 950;
+const float INFO_WID = 450;
+const float INFO_START_X = 0;
+const float INFO_START_Y = 0;
 
 enum Bar
 {

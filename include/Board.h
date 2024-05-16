@@ -20,7 +20,8 @@ public:
 	//void clear();
 	//void reset();
 	void loadAndRunFromExisting(Controller& controller);
-	void generateGame(Controller& controller) const;
+	void generateGame(Controller& controller);
+	void createRandomStick();
 	void updateControllerData(Controller& controller, float time, int score) const;
 	void addStickToList(StickType colour, float angle, int len, float x, float y);
 	//void updateSticksList(auto needToRemoveIt);
@@ -32,6 +33,9 @@ private:
 	sf::RectangleShape m_board;    // for the background
 	std::list<Stick> m_sticks;
 	std::multimap<int, Stick*> m_removeable;
+
+
+	float randomFloat(float min, float max) const;
 
 };
 

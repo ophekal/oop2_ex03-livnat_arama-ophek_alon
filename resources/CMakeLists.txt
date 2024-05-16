@@ -19,6 +19,7 @@ configure_file ("startGame.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("exitButton.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("gameRulesWindow.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("time.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("infoBar.png" ${CMAKE_BINARY_DIR} COPYONLY)
 
 configure_file ("gameMusic.wav" ${CMAKE_BINARY_DIR} COPYONLY)
 

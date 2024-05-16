@@ -4,6 +4,7 @@
 #include <sstream>
 #include <string>
 #include <stdexcept>
+#include <random>
 #include "Macros.h"
 #include <filesystem>
 #include "Stick.h"
@@ -73,7 +74,6 @@ void Board::loadAndRunFromExisting(Controller& controller)
 						//throw  worng input, if range isn't good, x-y arent goot etc
 					}
 					addStickToList(StickType(colour), angle, len, x, y);
-					firstLine = false;
 				}
 			}
 			catch (std::exception& e)
@@ -91,9 +91,47 @@ void Board::loadAndRunFromExisting(Controller& controller)
 
 //-------------------------------------------------------------------------------------
 //This function is responsoble of creating the level randomly
-void Board::generateGame(Controller& controller) const
+void Board::generateGame(Controller& controller)
 {
-	//auto colour = srand
+	// Calculate the total area of the board of docks
+	float boardArea = (BOARD_WID * BOARD_HIG )/ 10000.0f;
+
+	// Generate a random number of sticks proportional to the size of the board
+	int numSticks = randomFloat(30, 50); // randomFloat(0.1f, 0.5f)* boardArea; // Adjust the range according to your preference
+
+	// Create the sticks and insert them into the list
+	for (int i = 0; i < numSticks; ++i) 
+	{
+		createRandomStick();		
+	}
+
+	//after create the list check for the removeable sticks
+	updateRemoveable();	
+
+	updateControllerData(controller, 161, 0);
+}
+//-------------------------------------------------------------------------------------
+void Board::createRandomStick()
+{
+	// Generate random values within the board area
+	float x = randomFloat(BOARD_START_X+100 ,BOARD_START_X + BOARD_WID-100),
+		  y = randomFloat(BOARD_START_Y , BOARD_START_Y + BOARD_HIG-100),
+	      len = randomFloat(19, BOARD_WID / 10.0f),
+		  angle = randomFloat(1, 179);
+
+
+	// Generate random color
+	int colour = rand() % 5; 
+	addStickToList(StickType(colour), angle, len, x, y);
+}
+//-------------------------------------------------------------------------------------
+// Function to generate a random float in a given range
+float Board::randomFloat(float min, float max)const
+{
+	static std::random_device rd;
+	static std::mt19937 gen(rd());
+	std::uniform_real_distribution<float> dis(min, max);
+	return dis(gen);
 }
 
 //-------------------------------------------------------------------------------------

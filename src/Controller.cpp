@@ -87,9 +87,9 @@ void Controller::windowPollEvent(sf::RenderWindow& window, bool& musicOn)
 void Controller::print(sf::RenderWindow& window)
 {
 	window.clear();
-	//m_infoBar.printInfoBar(window);
-	m_clock.printClock(window, m_levelOver);
 	m_board.printBoard(window);
+	m_infoBar.printInfoBar(window);
+	m_clock.printClock(window, m_levelOver);
 	window.display();
 }
 

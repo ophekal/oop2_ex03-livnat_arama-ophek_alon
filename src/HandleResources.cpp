@@ -41,7 +41,7 @@ void HandleResources::updateObjectVector()
 //-------------------------------------------------------------------------
 void HandleResources::updateBackgroundVector()
 {
-	m_backgroundsTextures.resize(9);
+	m_backgroundsTextures.resize(10);
 	m_backgroundsTextures[B_MENU].loadFromFile("menu.jpg");
 	m_backgroundsTextures[B_BOARD].loadFromFile("boardBackground.png");
 	m_backgroundsTextures[B_EXIT].loadFromFile("exitButton.png");
@@ -51,6 +51,7 @@ void HandleResources::updateBackgroundVector()
 	m_backgroundsTextures[B_GAMERULES].loadFromFile("gameRulesWindow.png");
 	m_backgroundsTextures[B_SOUND].loadFromFile("music.png");
 	m_backgroundsTextures[B_MUTE].loadFromFile("mute.png");
+	m_backgroundsTextures[B_INFOBAR].loadFromFile("infoBar.png");
 }
 
 //-------------------------------------------------------------------------

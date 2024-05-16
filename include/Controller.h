@@ -18,7 +18,7 @@ public:
 private:
 
 	Board m_board;
-	//InfoBar m_infoBar;
+	InfoBar m_infoBar;
 	Clock m_clock;
 
 	float m_levelTime = 0;

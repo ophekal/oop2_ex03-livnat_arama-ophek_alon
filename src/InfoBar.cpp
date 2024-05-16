@@ -1,24 +1,27 @@
-//
-//#include "InfoBar.h"
-//#include <SFML/Graphics.hpp>
-//#include "Macros.h"
-//#include "HandleResources.h"
-//
-////----------------------------------------------------------------------------------------------------------------------------
-//InfoBar::InfoBar()
-//{
-//	m_infoBar.resize(8);
-//	m_infoBar[0].updateButton(*HandleResources::instance().getInfoBarTexture(B_INFO), INFO_X, INFO_Y, INFO_SIZE);
-//	m_infoBar[1].updateButton(*HandleResources::instance().getInfoBarTexture(B_LEVEL), INFO_X, LEVEL_Y, INFO_SIZE);
-//	m_infoBar[2].updateButton(*HandleResources::instance().getInfoBarTexture(B_LIVES), INFO_X, LIVES_Y, INFO_SIZE);
-//	m_infoBar[3].updateButton(*HandleResources::instance().getInfoBarTexture(B_KEYS), INFO_X, KEYS_Y, INFO_SIZE);
-//	m_infoBar[4].updateButton(*HandleResources::instance().getInfoBarTexture(B_HOME), HOME_X, HOME_Y, SOUND_SIZE);
-//	m_infoBar[5].updateButton(*HandleResources::instance().getBackgroundTexture(B_SOUND), I_SOUND_X, I_SOUND_Y, SOUND_SIZE);
-//	m_infoBar[6].updateButton(*HandleResources::instance().getInfoBarTexture(B_SCORE), INFO_X, SCORE_Y, INFO_SIZE);
-//	m_infoBar[7].updateButton(*HandleResources::instance().getInfoBarTexture(B_RESTART), RESTART_X, RESTART_Y, SOUND_SIZE);
-//
-//}
-//
+
+#include "InfoBar.h"
+#include <SFML/Graphics.hpp>
+#include "Macros.h"
+#include "HandleResources.h"
+
+//----------------------------------------------------------------------------------------------------------------------------
+InfoBar::InfoBar()
+	:m_infoBackground(sf::Vector2f(INFO_WID, INFO_HIG))
+{
+	m_infoBackground.setPosition({ INFO_START_X ,INFO_START_Y });
+	m_infoBackground.setTexture(HandleResources::instance().getBackgroundTexture(B_INFOBAR));
+	//m_infoBar.resize(8);
+	//m_infoBar[0].updateButton(*HandleResources::instance().getInfoBarTexture(B_INFO), INFO_X, INFO_Y, INFO_SIZE);
+	//m_infoBar[1].updateButton(*HandleResources::instance().getInfoBarTexture(B_LEVEL), INFO_X, LEVEL_Y, INFO_SIZE);
+	//m_infoBar[2].updateButton(*HandleResources::instance().getInfoBarTexture(B_LIVES), INFO_X, LIVES_Y, INFO_SIZE);
+	//m_infoBar[3].updateButton(*HandleResources::instance().getInfoBarTexture(B_KEYS), INFO_X, KEYS_Y, INFO_SIZE);
+	//m_infoBar[4].updateButton(*HandleResources::instance().getInfoBarTexture(B_HOME), HOME_X, HOME_Y, SOUND_SIZE);
+	//m_infoBar[5].updateButton(*HandleResources::instance().getBackgroundTexture(B_SOUND), I_SOUND_X, I_SOUND_Y, SOUND_SIZE);
+	//m_infoBar[6].updateButton(*HandleResources::instance().getInfoBarTexture(B_SCORE), INFO_X, SCORE_Y, INFO_SIZE);
+	//m_infoBar[7].updateButton(*HandleResources::instance().getInfoBarTexture(B_RESTART), RESTART_X, RESTART_Y, SOUND_SIZE);
+
+}
+
 ////----------------------------------------------------------------------------------------------------------------------------
 //void InfoBar::setInfoBar(int levelNum, int score, int key, int lives, bool& musicOn)
 //{
@@ -29,15 +32,16 @@
 //	checkMusic(musicOn);
 //}
 //
-////----------------------------------------------------------------------------------------------------------------------------
-//void InfoBar::printInfoBar(sf::RenderWindow& window)
-//{
-//	for (auto index = 0; index < m_infoBar.size(); index++)
-//	{
-//		m_infoBar[index].printButton(window);
-//	}
-//}
-//
+//----------------------------------------------------------------------------------------------------------------------------
+void InfoBar::printInfoBar(sf::RenderWindow& window)const
+{
+	window.draw(m_infoBackground);
+	//for (auto index = 0; index < m_infoBar.size(); index++)
+	//{
+	//	m_infoBar[index].printButton(window);
+	//}
+}
+
 ////----------------------------------------------------------------------------------------------------------------------------
 //void InfoBar::updateLife(int lives)
 //{
