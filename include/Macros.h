@@ -95,12 +95,13 @@ const float INFO_START_Y = 0;
 enum Bar
 {
 	B_TIME,
+	B_SAVE,
 	B_INFO,
 	B_PICKEDUP,
 	B_FREE,
 	B_HOME,
-	B_SCORE,
-	B_SAVE
+	B_SCORE
+	
 	//B_RESTART
 };
 
@@ -119,8 +120,10 @@ const float I_SOUND_X = 50;
 const float I_SOUND_Y = 900;
 const float HOME_X = 167.5;
 const float HOME_Y = 900;
-const float RESTART_X = 285;
-const float RESTART_Y = 900;
+//const float RESTART_X = 285;
+//const float RESTART_Y = 900;
+const float SAVE_X = 285;
+const float SAVE_Y = 900;
 
 
 const float LONG_LEVEL = (3 * 60) + 1;
