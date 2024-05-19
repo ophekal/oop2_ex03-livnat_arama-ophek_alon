@@ -21,6 +21,10 @@ void Controller::run(sf::RenderWindow& window, bool& load, bool& musicOn)
 
 		startGame(window,load, musicOn);
 
+		if (m_levelOver)
+		{
+			return;
+		}
 		//if (m_gameOver)
 		//{
 			//	printFinalScore(window);
@@ -51,9 +55,13 @@ void Controller::startGame(sf::RenderWindow& window,bool load, bool& musicOn)
 
 	m_clock.setClock(m_levelTime, m_levelOver);
 
-	while (!m_levelOver || Stick::getCount() == 0)
+	while (/*!m_levelOver || */Stick::getCount() == 0)
 	{
 		print(window);
+		if (m_levelOver)
+		{
+			return;
+		}
 		windowPollEvent(window, musicOn);
 
 		//const auto deltaTime = clock.restart();
@@ -209,11 +217,13 @@ void Controller::handleClickBoard(const sf::Vector2f& location)
 //---------------------------------------------------------------------------------------
 void Controller::handleClickInfoBar(const sf::Vector2f& location, bool& musicOn)
 {
+	bool pressedSave = false;
+
 	//checking if we're in the tool bar
 	if (location.y >= 0 && location.y <= 950  &&	//the range of Y in the toolbar
 		location.x >= 0 && location.x <= 450)						//the range of X in the toolbar
 	{
-		m_infoBar.handleClick(location, m_levelOver, musicOn);
+		m_infoBar.handleClick(location, m_levelOver, pressedSave, musicOn);
 	}
 	
 }

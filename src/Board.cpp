@@ -108,7 +108,7 @@ void Board::generateGame(Controller& controller)
 	//after create the list check for the removeable sticks
 	updateRemoveable();	
 
-	updateControllerData(controller, 161, 0);
+	updateControllerData(controller, 20, 0);
 }
 //-------------------------------------------------------------------------------------
 void Board::createRandomStick()
