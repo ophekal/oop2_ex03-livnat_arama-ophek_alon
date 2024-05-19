@@ -19,8 +19,9 @@ public:
 
 private:
 	sf::RectangleShape m_infoBackground;    // for the background
-	std::string m_pickedUpSticks;
-	std::string m_freeSticks;
+	std::string m_sticksPicked;
+	std::string m_removableSticks;
+	std::string m_sticksLeft;
 	std::string m_score;
 	std::vector<InfoItem> m_infoBar;
 };
