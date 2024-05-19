@@ -220,16 +220,21 @@ void Controller::handleClickBoard(const sf::Vector2f& location)
 void Controller::handleClickInfoBar(const sf::Vector2f& location, bool& musicOn)
 {
 	bool pressedSave = false;
+	bool pressedHint = false;
 
 	//checking if we're in the tool bar
 	if (location.y >= 0 && location.y <= 950  &&	//the range of Y in the toolbar
 		location.x >= 0 && location.x <= 450)						//the range of X in the toolbar
 	{
-		m_infoBar.handleClick(location, m_levelOver, pressedSave, musicOn);
+		m_infoBar.handleClick(location, m_levelOver, pressedSave,pressedHint, musicOn);
 	}
 	if (pressedSave)
 	{
 		m_board.handlePressedSave(m_totalScore, m_levelTime);
+	}
+	else if (pressedHint)
+	{
+		m_board.handlePressedHint();
 	}
 	
 }

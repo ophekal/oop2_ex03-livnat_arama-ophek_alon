@@ -78,7 +78,7 @@ void InfoBar::updateScore(int score)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------
-void InfoBar::handleClick(const sf::Vector2f& location, bool& levelOver,bool& pressedSave, bool& musicOn)
+void InfoBar::handleClick(const sf::Vector2f& location, bool& levelOver,bool& pressedSave,bool& pressedHint, bool& musicOn)
 {
 	if (m_infoBar[2].getRectangleInfoItem().getGlobalBounds().contains(location))
 	{
@@ -94,18 +94,12 @@ void InfoBar::handleClick(const sf::Vector2f& location, bool& levelOver,bool& pr
 	{
 		pressedSave = true;
 		return;
-		//handleSave();
 	}
-	//else if (m_infoBar[7].getRectangleButton().getGlobalBounds().contains(location))
-	//{
-	//	levelOver = true;
-	//	Mouse* mousePtr = dynamic_cast<Mouse*>(mouse.get());
-	//	if (mousePtr != nullptr)
-	//	{
-	//		mousePtr->setLives(mousePtr->getLives() + 1);	//in order for life not to change when restarting level
-	//	}
-	//	return;
-	//}
+	else if (m_infoBar[7].getRectangleInfoItem().getGlobalBounds().contains(location))
+	{
+		pressedHint = true;
+		return;
+	}
 }
 
 //----------------------------------------------------------------------------------------------------------------------------

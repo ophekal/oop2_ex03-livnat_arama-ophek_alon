@@ -15,7 +15,7 @@ public:
 	void updateSticksPicked(int sticksPicked);
 	void updateSticksLeft(int sticksLeft);
 	void setInfoBar(int score,int removableSticks, int sticksPicked, int sticksLeft, bool& musicOn);
-	void handleClick(const sf::Vector2f& location, bool& levelOver,bool& pressedSave, bool& musicOn);
+	void handleClick(const sf::Vector2f& location, bool& levelOver,bool& pressedSave,bool& pressedHint, bool& musicOn);
 	void updateMusic(bool& musicOn);
 	void checkMusic(const bool& musicOn);
 

@@ -272,5 +272,10 @@ int Board::getNumOfSticks()const
 {
 	return m_sticks.size();
 }
+//-----------------------------------------------------------------------------
+void Board::handlePressedHint()
+{
 
+
+}
 
