@@ -18,6 +18,8 @@ Board::Board()
 {
 	m_board.setPosition({ BOARD_START_X ,BOARD_START_Y });
 	m_board.setTexture(HandleResources::instance().getBackgroundTexture(B_BOARD));
+
+	// why it is not working???
 	m_board.setOutlineThickness(5.f);
 	m_board.setOutlineColor(sf::Color::Black);
 }
@@ -41,6 +43,8 @@ void Board::readTheLevelAndUpdateData(Controller& controller, bool load)
 void Board::loadAndRunFromExisting(Controller& controller) 
 {
 	bool firstLine = true;
+	float time = 0;  //default value
+	int score = 0;  //default value
 
 	auto file = std::ifstream("level.txt");
 	try
@@ -58,13 +62,11 @@ void Board::loadAndRunFromExisting(Controller& controller)
 
 				if (firstLine)
 				{
-					float time;
-					int score;
 					if (!(iss >> time >> score))
 					{
 						//throw  wrong input
 					}
-					updateControllerData(controller, time, score);
+					//updateControllerData(controller, time, score);
 					firstLine = false;
 				}
 				else
@@ -84,6 +86,7 @@ void Board::loadAndRunFromExisting(Controller& controller)
 			}
 		}
 		updateRemoveable();
+		updateControllerData(controller, time, score);
 	}
 	catch (std::exception& e)
 	{
@@ -275,7 +278,6 @@ int Board::getNumOfSticks()const
 //-----------------------------------------------------------------------------
 void Board::handlePressedHint()
 {
-
 
 }
 

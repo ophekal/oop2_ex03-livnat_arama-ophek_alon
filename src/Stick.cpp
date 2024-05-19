@@ -7,11 +7,12 @@
 Stick::Stick(const sf::Texture* picture, Colour colour, float angle, const sf::Vector2f& start, float len)
 	  :m_colour(colour), m_angle(angle), m_startingPoint(start), m_length(len)
 {
-    float pixelLength = m_length*30.0f;
+    m_length *= 30.0f;
+   // float pixelLength = m_length*30.f;
     float pixelWidth = 30.0f;
 
     m_stick.setTexture(picture);
-    m_stick.setSize(sf::Vector2f(pixelLength, pixelWidth));
+    m_stick.setSize(sf::Vector2f(m_length, pixelWidth));
     m_stick.setPosition(start);
 }
 
@@ -72,7 +73,7 @@ int Stick::getStickScore()const
 sf::Vector2f Stick::getEndPoint()const
 {
     // Convert angle from degrees to radians
-    float angleInRadians = m_angle * std::numbers::pi_v<float> / 180.0;
+    float angleInRadians = m_angle * std::numbers::pi_v<float> / 180.0f;
 
     // Calculate the coordinates of the end point
     float newX = m_startingPoint.x + m_length * cos(angleInRadians);
@@ -167,7 +168,7 @@ void Stick::setInRemoveable(bool boolValue)
 //--------------------------------------------------------------------------------
 std::string Stick::getStickInfo()const
 {
-    std::string stickInfo = std::to_string(m_colour) + " " + std::to_string(m_angle) +" "+ std::to_string(m_length)
+    std::string stickInfo = std::to_string(m_colour) + " " + std::to_string(m_angle) +" "+ std::to_string(m_length/30.0f)
                             + " " +std::to_string(m_startingPoint.x) + " "+ std::to_string(m_startingPoint.y) + "\n";
 
     return stickInfo;
