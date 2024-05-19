@@ -133,8 +133,8 @@ const float HOME_Y = 855;
 
 
 
-const float LONG_LEVEL = (3 * 60) + 1;
-const float SHORT_LEVEL = ((1.5) * 60) + 1;
+const float LONG_LEVEL = (4* 60) + 1;
+const float SHORT_LEVEL = (2 * 60) + 1;
 
 //----------------sounds-----------
 

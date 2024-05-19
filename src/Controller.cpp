@@ -59,6 +59,7 @@ void Controller::startGame(sf::RenderWindow& window,bool load, bool& musicOn)
 
 	while (/*!m_levelOver || */Stick::getCount() == 0)
 	{
+		std::cout << "num of sticks: " << Stick::getCount()<<"\n";
 		print(window);
 		if (m_levelOver)
 		{

@@ -15,7 +15,7 @@ Stick::Stick(const sf::Texture* picture, Colour colour, float angle, const sf::V
     m_stick.setTexture(picture);
     m_stick.setSize(sf::Vector2f(pixelLength, pixelWidth));
     m_stick.setPosition(start);
-    m_count++;
+    ++m_count;
 }
 
 //---------------------------------------------------------------------------------------
