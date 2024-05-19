@@ -77,7 +77,8 @@ void Board::loadAndRunFromExisting(Controller& controller)
 					{
 						//throw  worng input, if range isn't good, x-y arent goot etc
 					}
-					addStickToList(StickType(colour), angle, len, x, y);
+					Stick stick(HandleResources::instance().getObjectTexture(StickType(colour)), Colour(colour), angle, { x,y }, len);
+					addStickToList(stick);
 				}
 			}
 			catch (std::exception& e)
@@ -120,16 +121,31 @@ void Board::generateGame(Controller& controller)
 //-------------------------------------------------------------------------------------
 void Board::createRandomStick()
 {
-	// Generate random values within the board area
-	float x = randomFloat(BOARD_START_X+100 ,BOARD_START_X + BOARD_WID-100),
-		  y = randomFloat(BOARD_START_Y , BOARD_START_Y + BOARD_HIG-100),
-	      len = randomFloat(19, BOARD_WID / 10.0f),
-		  angle = randomFloat(1, 179);
 
+	float x = 0, y = 0, len = 0, angle = 0;
+	int colour = 0;
 
-	// Generate random color
-	int colour = rand() % 5; 
-	addStickToList(StickType(colour), angle, len, x, y);
+	while (1)
+	{
+		// Generate random values within the board area
+		x = randomFloat(BOARD_START_X, BOARD_START_X + BOARD_WID),
+		y = randomFloat(BOARD_START_Y, BOARD_START_Y + BOARD_HIG),
+		len = randomFloat(15, BOARD_WID / 10.0f),
+		angle = randomFloat(1, 179);
+
+		// Generate random color
+		colour = rand() % 5;
+
+		Stick stick(HandleResources::instance().getObjectTexture(StickType(colour)), Colour(colour), angle, {x,y}, len);
+		sf::Vector2f endPoint = stick.getEndPoint();
+		if (endPoint.y >= 0 && endPoint.y <= 950 &&
+			endPoint.x >= 450 && endPoint.x <= 1500)
+		{
+			addStickToList(stick);
+			return;
+		}
+	}
+	
 }
 //-------------------------------------------------------------------------------------
 // Function to generate a random float in a given range
@@ -155,10 +171,10 @@ int Board::getRemovableSticks()const
 }
 //-------------------------------------------------------------------------------------
 //This function is responsible of adding the stick to the list of sticks
-void Board::addStickToList(StickType colour, float angle, float len, float x, float y)
+void Board::addStickToList(Stick& stick)/*StickType colour, float angle, float len, float x, float y)*/
 {
-	sf::Vector2f point(x,y);
-	Stick stick(HandleResources::instance().getObjectTexture(colour), Colour(colour), angle, point, len);
+	//sf::Vector2f point(x,y);
+	//Stick stick(HandleResources::instance().getObjectTexture(colour), Colour(colour), angle, point, len);
 	
 	m_sticks.push_back(stick);
 	
