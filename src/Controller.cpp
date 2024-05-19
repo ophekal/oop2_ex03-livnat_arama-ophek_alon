@@ -44,6 +44,8 @@ void Controller::setData(float time, int score)
 {
 	m_totalScore = score;
 	m_levelTime = time;
+	m_removableSticks = m_board.getRemovableSticks();
+	m_sticksLeft = Stick::getCount();
 }
 
 //------------------------------------------------------------------------------
@@ -235,7 +237,7 @@ void Controller::handleClickInfoBar(const sf::Vector2f& location, bool& musicOn)
 void Controller::updateInfoBar(bool& musicOn)
 {
 
-	m_infoBar.setInfoBar(m_totalScore, musicOn);
+	m_infoBar.setInfoBar(m_totalScore,m_removableSticks,m_sticksPicked,m_sticksLeft, musicOn);
 	//int keys = 0;
 	//int lives = 0;
 

@@ -97,33 +97,40 @@ enum Bar
 	B_TIME,
 	B_SAVE,
 	B_HOME,
-	B_INFO,
-	B_PICKEDUP,
 	B_FREE,
-	B_SCORE
+	B_PICKEDUP,
+	B_LEFT,
+	B_SCORE,
+	B_HINT
 	
 	//B_RESTART
 };
 
-const sf::Vector2f INFO_SIZE = { 300,110 };
+const sf::Vector2f INFO_SIZE = { 300,90 };
 
-const float INFO_X = 50;
+const float INFO_X = 70;
 const float INFO_Y = 50;
-const float CLOCK_Y = 190;
-const float LEVEL_Y = 330;
-const float LIVES_Y = 470;
-const float KEYS_Y = 610;
-const float SCORE_Y = 750;
+const float CLOCK_Y = 120;
+//const float LEVEL_Y = 330;
+//const float LIVES_Y = 470;
+
+const float FREE_Y = 225;
+const float PICKEDUP_Y = 330;
+const float LEFT_Y = 435;
+const float SCORE_Y = 540;
+const float SAVE_Y = 750;
+const float HINT_Y = 645;
+
 
 
 const float I_SOUND_X = 50;
-const float I_SOUND_Y = 850;
+const float I_SOUND_Y = 855;
 const float HOME_X = 335;
-const float HOME_Y = 850;
+const float HOME_Y = 855;
 //const float RESTART_X = 285;
 //const float RESTART_Y = 900;
-const float SAVE_X = 50;
-const float SAVE_Y = 760;
+//const float SAVE_X = 50;
+
 
 
 const float LONG_LEVEL = (3 * 60) + 1;
