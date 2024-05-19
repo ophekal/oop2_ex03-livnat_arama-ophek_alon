@@ -11,7 +11,7 @@ InfoBar::InfoBar()
 	m_infoBackground.setPosition({ INFO_START_X ,INFO_START_Y });
 	m_infoBackground.setTexture(HandleResources::instance().getBackgroundTexture(B_INFOBAR));
 	m_infoBar.resize(3);
-	m_infoBar[0].updateInfoItem(*HandleResources::instance().getInfoBarTexture(B_SAVE), SAVE_X, SAVE_Y, SOUND_SIZE);
+	m_infoBar[0].updateInfoItem(*HandleResources::instance().getInfoBarTexture(B_SAVE), SAVE_X, SAVE_Y, INFO_SIZE);
 	m_infoBar[1].updateInfoItem(*HandleResources::instance().getBackgroundTexture(B_SOUND), I_SOUND_X, I_SOUND_Y, SOUND_SIZE);
 	m_infoBar[2].updateInfoItem(*HandleResources::instance().getInfoBarTexture(B_HOME), HOME_X, HOME_Y, SOUND_SIZE);
 	//m_infoBar[0].updateButton(*HandleResources::instance().getInfoBarTexture(B_INFO), INFO_X, INFO_Y, INFO_SIZE);

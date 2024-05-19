@@ -66,7 +66,7 @@ void HandleResources::updateInfoBarVector()
 
 	//m_infoBarTextures[B_SCORE].loadFromFile("score.png");
 	//m_infoBarTextures[B_RESTART].loadFromFile("restart.png");
-	m_infoBarTextures[B_SAVE].loadFromFile("save.jpg");
+	m_infoBarTextures[B_SAVE].loadFromFile("saveButton.png");
 	m_infoBarTextures[B_HOME].loadFromFile("home.png");
 }
 

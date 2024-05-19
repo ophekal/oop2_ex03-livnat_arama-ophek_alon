@@ -21,6 +21,7 @@ configure_file ("gameRulesWindow.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("time.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("infoBar.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("save.jpg" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("saveButton.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("home.png" ${CMAKE_BINARY_DIR} COPYONLY)
 
 configure_file ("gameMusic.wav" ${CMAKE_BINARY_DIR} COPYONLY)

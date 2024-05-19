@@ -117,13 +117,13 @@ const float SCORE_Y = 750;
 
 
 const float I_SOUND_X = 50;
-const float I_SOUND_Y = 800;
-const float HOME_X = 167.5;
-const float HOME_Y = 800;
+const float I_SOUND_Y = 850;
+const float HOME_X = 335;
+const float HOME_Y = 850;
 //const float RESTART_X = 285;
 //const float RESTART_Y = 900;
-const float SAVE_X = 285;
-const float SAVE_Y = 800;
+const float SAVE_X = 50;
+const float SAVE_Y = 760;
 
 
 const float LONG_LEVEL = (3 * 60) + 1;
