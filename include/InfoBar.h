@@ -23,6 +23,7 @@ public:
 
 private:
 	sf::RectangleShape m_infoBackground;    // for the background
+	sf::Text m_text;
 	std::string m_sticksPicked;
 	std::string m_removableSticks;
 	std::string m_sticksLeft;
