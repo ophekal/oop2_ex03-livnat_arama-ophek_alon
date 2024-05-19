@@ -18,13 +18,13 @@ InfoBar::InfoBar()
 	m_text.setPosition(75, 50);
 
 	m_infoBar.resize(8);
-	m_infoBar[0].updateInfoItem(*HandleResources::instance().getInfoBarTexture(B_SAVE), INFO_X, SAVE_Y, INFO_SIZE);
+	m_infoBar[0].updateInfoItem(*HandleResources::instance().getInfoBarTexture(B_SCORE), INFO_X, SCORE_Y, INFO_SIZE);
 	m_infoBar[1].updateInfoItem(*HandleResources::instance().getBackgroundTexture(B_SOUND), I_SOUND_X, I_SOUND_Y, SOUND_SIZE);
 	m_infoBar[2].updateInfoItem(*HandleResources::instance().getInfoBarTexture(B_HOME), HOME_X, HOME_Y, SOUND_SIZE);
 	m_infoBar[3].updateInfoItem(*HandleResources::instance().getInfoBarTexture(B_FREE), INFO_X, FREE_Y, INFO_SIZE);
 	m_infoBar[4].updateInfoItem(*HandleResources::instance().getInfoBarTexture(B_PICKEDUP), INFO_X, PICKEDUP_Y, INFO_SIZE);
 	m_infoBar[5].updateInfoItem(*HandleResources::instance().getInfoBarTexture(B_LEFT), INFO_X, LEFT_Y, INFO_SIZE);
-	m_infoBar[6].updateInfoItem(*HandleResources::instance().getInfoBarTexture(B_SCORE), INFO_X, SCORE_Y, INFO_SIZE);
+	m_infoBar[6].updateInfoItem(*HandleResources::instance().getInfoBarTexture(B_SAVE), INFO_X, SAVE_Y, INFO_SIZE);
 	m_infoBar[7].updateInfoItem(*HandleResources::instance().getInfoBarTexture(B_HINT), INFO_X, HINT_Y, INFO_SIZE);
 }
 
@@ -59,10 +59,29 @@ void InfoBar::updateSticksLeft(int sticksLeft)
 	m_infoBar[5].setText(m_sticksLeft);
 }
 //----------------------------------------------------------------------------------------------------------------------------
-void InfoBar::printInfoBar(sf::RenderWindow& window)const
+void InfoBar::printInfoBar(sf::RenderWindow& window)
 {
 	window.draw(m_infoBackground);
 	window.draw(m_text);
+
+	sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+	sf::Vector2f mousePosF(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y));
+
+	//increase the buttons when mouse ontop
+	for (int i = 6; i < 8; i++)
+	{
+		sf::RectangleShape& button = m_infoBar[i].getRectangleInfoItem();
+		sf::FloatRect bounds = button.getGlobalBounds();
+
+		if (bounds.contains(mousePosF))
+		{
+			button.setScale(1.05f, 1.05f);
+		}
+		else
+		{
+			button.setScale(1.0f, 1.0f);
+		}
+	}
 
 	for (auto index = 0; index < m_infoBar.size(); index++)
 	{
@@ -74,7 +93,7 @@ void InfoBar::printInfoBar(sf::RenderWindow& window)const
 void InfoBar::updateScore(int score)
 {
 	m_score = std::to_string(score);
-	m_infoBar[6].setText(m_score);
+	m_infoBar[0].setText(m_score);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------
@@ -90,7 +109,7 @@ void InfoBar::handleClick(const sf::Vector2f& location, bool& levelOver,bool& pr
 	{
 		updateMusic(musicOn);
 	}
-	else if (m_infoBar[0].getRectangleInfoItem().getGlobalBounds().contains(location))
+	else if (m_infoBar[6].getRectangleInfoItem().getGlobalBounds().contains(location))
 	{
 		pressedSave = true;
 		return;

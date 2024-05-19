@@ -9,7 +9,7 @@ class InfoBar
 {
 public:
 	InfoBar();
-	void printInfoBar(sf::RenderWindow& window)const;
+	void printInfoBar(sf::RenderWindow& window);
 	void updateScore(int score);
 	void updateRemovableSticks(int removableSticks);
 	void updateSticksPicked(int sticksPicked);
