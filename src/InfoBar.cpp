@@ -55,8 +55,8 @@ void InfoBar::printInfoBar(sf::RenderWindow& window)const
 ////----------------------------------------------------------------------------------------------------------------------------
 void InfoBar::updateScore(int score)
 {
-	m_score = std::to_string(score);
-	m_infoBar[1].setText(m_score);
+	/*m_score = std::to_string(score);
+	m_infoBar[1].setText(m_score);*/
 }
 
 ////----------------------------------------------------------------------------------------------------------------------------
