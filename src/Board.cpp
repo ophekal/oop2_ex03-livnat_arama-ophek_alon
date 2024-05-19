@@ -224,3 +224,27 @@ void Board::printBoard(sf::RenderWindow& window)
 		it -> draw(window);
 	}
 }
+//-------------------------------------------------------------------------------------
+void Board::handlePressedSave()
+{
+
+}
+//std::ofstream board;
+//
+//if (pressed == B_SAVE)
+//{
+//	board.open("Board.txt");
+//
+//	if (board.is_open())
+//	{
+//		m_board.saveBoardAndCopyToText(board);
+//		levelExists = true;
+//	}
+//}
+//else if (pressed == B_NEWPAGE)
+//{
+//	levelExists = false;
+//	std::remove("Board.txt");
+//	m_window.close();
+//	return;
+//}

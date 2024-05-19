@@ -24,6 +24,7 @@ public:
 	void createRandomStick();
 	void updateControllerData(Controller& controller, float time, int score) const;
 	void addStickToList(StickType colour, float angle, int len, float x, float y);
+	void handlePressedSave();
 	//void updateSticksList(auto needToRemoveIt);
 	void updateRemoveable();
 	//void deleteStick(auto needToRemoveIt);

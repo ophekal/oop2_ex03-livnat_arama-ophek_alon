@@ -225,6 +225,10 @@ void Controller::handleClickInfoBar(const sf::Vector2f& location, bool& musicOn)
 	{
 		m_infoBar.handleClick(location, m_levelOver, pressedSave, musicOn);
 	}
+	if (pressedSave)
+	{
+		m_board.handlePressedSave();
+	}
 	
 }
 //----------------------------------------------------------------------------------------
