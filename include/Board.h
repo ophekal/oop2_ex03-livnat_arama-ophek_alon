@@ -28,6 +28,7 @@ public:
 	void saveBoardAndCopyToText(std::ofstream& boardFile, int score, float levelTime)const;
 	//void updateSticksList(auto needToRemoveIt);
 	void updateRemoveable();
+	int getRemovableSticks()const;
 	//void deleteStick(auto needToRemoveIt);
 
 private:

@@ -20,9 +20,14 @@ configure_file ("exitButton.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("gameRulesWindow.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("time.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("infoBar.png" ${CMAKE_BINARY_DIR} COPYONLY)
-configure_file ("save.jpg" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("saveButton.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("home.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("hintButton.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("freeSticks.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("pickedUp.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("sticksLeft.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("score.png" ${CMAKE_BINARY_DIR} COPYONLY)
+
 
 configure_file ("gameMusic.wav" ${CMAKE_BINARY_DIR} COPYONLY)
 

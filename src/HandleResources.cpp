@@ -57,7 +57,7 @@ void HandleResources::updateBackgroundVector()
 //-------------------------------------------------------------------------
 void HandleResources::updateInfoBarVector()
 {
-	m_infoBarTextures.resize(3);
+	m_infoBarTextures.resize(7);
 	//m_infoBarTextures[B_INFO].loadFromFile("information.png");
 	//m_infoBarTextures[B_LEVEL].loadFromFile("level.png");
 	//m_infoBarTextures[B_LIVES].loadFromFile("lives.png");
@@ -68,6 +68,10 @@ void HandleResources::updateInfoBarVector()
 	//m_infoBarTextures[B_RESTART].loadFromFile("restart.png");
 	m_infoBarTextures[B_SAVE].loadFromFile("saveButton.png");
 	m_infoBarTextures[B_HOME].loadFromFile("home.png");
+	m_infoBarTextures[B_FREE].loadFromFile("freeSticks.png");
+	m_infoBarTextures[B_PICKEDUP].loadFromFile("pickedUp.png");
+	m_infoBarTextures[B_LEFT].loadFromFile("sticksLeft.png");
+	m_infoBarTextures[B_SCORE].loadFromFile("score.png");		
 }
 
 //-------------------------------------------------------------------------

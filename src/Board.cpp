@@ -18,6 +18,8 @@ Board::Board()
 {
 	m_board.setPosition({ BOARD_START_X ,BOARD_START_Y });
 	m_board.setTexture(HandleResources::instance().getBackgroundTexture(B_BOARD));
+	m_board.setOutlineThickness(5.f);
+	m_board.setOutlineColor(sf::Color::Black);
 }
 
 //-------------------------------------------------------------------------------------
@@ -141,7 +143,11 @@ void Board::updateControllerData(Controller& controller, float time, int score) 
 {
 	controller.setData(time, score);
 }
-
+//------------------------------------------------------------------------------------
+int Board::getRemovableSticks()const
+{
+	return m_removeable.size();
+}
 //-------------------------------------------------------------------------------------
 //This function is responsible of adding the stick to the list of sticks
 void Board::addStickToList(StickType colour, float angle, float len, float x, float y)
@@ -216,6 +222,7 @@ void Board::updateRemoveable()
 //-------------------------------------------------------------------------------------
 void Board::printBoard(sf::RenderWindow& window)
 {
+
 	window.draw(m_board);
 
 	//go over the sticks list and draw the sticks

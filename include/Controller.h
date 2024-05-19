@@ -25,6 +25,9 @@ private:
 	bool m_levelOver = false;
 	int m_totalScore = 0;
 
+	int m_sticksPicked = 0;
+	int m_removableSticks;
+	int m_sticksLeft;
 
 	void startGame(sf::RenderWindow& window, bool load, bool& musicOn);
 	void windowPollEvent(sf::RenderWindow& window, bool& musicOn);
