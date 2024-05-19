@@ -70,34 +70,13 @@ void InfoBar::printInfoBar(sf::RenderWindow& window)const
 	}
 }
 
-////----------------------------------------------------------------------------------------------------------------------------
-//void InfoBar::updateLife(int lives)
-//{
-//	m_numOfLives = std::to_string(lives);
-//	m_infoBar[2].setText(m_numOfLives);
-//}
-//
-////----------------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------------
 void InfoBar::updateScore(int score)
 {
-	/*m_score = std::to_string(score);
-	m_infoBar[1].setText(m_score);*/
+	m_score = std::to_string(score);
+	m_infoBar[6].setText(m_score);
 }
 
-////----------------------------------------------------------------------------------------------------------------------------
-//void InfoBar::updateKey(int keys)
-//{
-//	m_numOfKeys = std::to_string(keys);
-//	m_infoBar[3].setText(m_numOfKeys);
-//}
-//
-////----------------------------------------------------------------------------------------------------------------------------
-//void InfoBar::updateLevel(int level)
-//{
-//	m_numOfLevel = std::to_string(level);
-//	m_infoBar[1].setText(m_numOfLevel);
-//}
-//
 //----------------------------------------------------------------------------------------------------------------------------
 void InfoBar::handleClick(const sf::Vector2f& location, bool& levelOver,bool& pressedSave, bool& musicOn)
 {
