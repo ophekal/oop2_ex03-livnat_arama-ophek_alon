@@ -7,7 +7,7 @@ class Stick
 {
 public:
     Stick(const sf::Texture* picture, Colour colour, float angle, const sf::Vector2f& start, float len);
-    ~Stick();
+    ~Stick()= default;
     void draw(sf::RenderWindow& window);
     int getBlockThisStick() const;
     void setBlockThisStick(int factor);
@@ -23,7 +23,7 @@ public:
     bool getInRemoveable()const;
     void setInRemoveable(bool boolValue);
     std::string getStickInfo()const;
-    static int getCount();
+    void updateSticksBlocking(Stick* stick); 
   
 
 private:
@@ -32,8 +32,9 @@ private:
     float m_angle;
     sf::Vector2f m_startingPoint;
     float m_length;
-    std::vector<Stick*> m_sticksBlocked;   //holds he sticks that this stick blocks
+    std::vector<Stick*> m_sticksBlocked;   //holds the sticks that this stick blocks
+    std::vector<Stick*> m_sticksBlocking;   //holds he sticks that block this stick
     int m_blockThisStick = 0;              //holds the number of sticks that block this stick
     bool m_inRemoveable = false;             //holds if the stick is allready in removable
-    static int m_count;             //holds the current number of sticks that on the board
+ 
 };

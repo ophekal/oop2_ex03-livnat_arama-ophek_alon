@@ -133,6 +133,7 @@ void Menu::handleLoad()
 		m_load = true;
 	}
 	startGame();
+	m_load = false;
 }
 //--------------------------------------------------------------------------------------------
 void Menu::pressedGameRules()

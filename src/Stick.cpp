@@ -3,31 +3,18 @@
 #include <numbers>
 
 
-//---------------------------------------------------------------------------------------
-int Stick::m_count = 0;
 //---------------------------------------------------------------------------------
 Stick::Stick(const sf::Texture* picture, Colour colour, float angle, const sf::Vector2f& start, float len)
 	  :m_colour(colour), m_angle(angle), m_startingPoint(start), m_length(len)
 {
-    float pixelLength = m_length *30.0f;
+    float pixelLength = m_length*30.0f;
     float pixelWidth = 30.0f;
 
     m_stick.setTexture(picture);
     m_stick.setSize(sf::Vector2f(pixelLength, pixelWidth));
     m_stick.setPosition(start);
-    ++m_count;
 }
 
-//---------------------------------------------------------------------------------------
-Stick::~Stick()
-{
-    --m_count;
-}
-//---------------------------------------------------------------------------------------
-int Stick::getCount()
-{
-    return m_count;
-}
 //----------------------------------------------------------------------------------------
 void Stick::draw(sf::RenderWindow& window)
 {
@@ -52,9 +39,10 @@ void Stick::setBlockThisStick(int factor)
     m_blockThisStick += factor;
 }
 //---------------------------------------------------------------------------------
-void Stick::updateSticksBlocked(Stick* stick)
+void Stick::updateSticksBlocking(Stick* stick)
 {
-    m_sticksBlocked.push_back(stick);
+    m_sticksBlocking.push_back(stick);
+    stick->updateSticksBlocked(this);
     m_blockThisStick++;
 }
 //---------------------------------------------------------------------------------
@@ -179,9 +167,14 @@ void Stick::setInRemoveable(bool boolValue)
 //--------------------------------------------------------------------------------
 std::string Stick::getStickInfo()const
 {
-    std::string stickInfo = std::to_string(m_colour) + " " + std::to_string(m_angle) + std::to_string(m_length)
+    std::string stickInfo = std::to_string(m_colour) + " " + std::to_string(m_angle) +" "+ std::to_string(m_length)
                             + " " +std::to_string(m_startingPoint.x) + " "+ std::to_string(m_startingPoint.y) + "\n";
 
     return stickInfo;
 
+}
+//----------------------------------------------------------------------------------
+void Stick::updateSticksBlocked(Stick* stick)
+{
+    m_sticksBlocked.push_back(stick);
 }

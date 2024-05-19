@@ -110,7 +110,7 @@ void Board::generateGame(Controller& controller)
 	//after create the list check for the removeable sticks
 	updateRemoveable();	
 
-	float time = Stick::getCount() >= 35 ? LONG_LEVEL : SHORT_LEVEL;
+	float time = m_sticks.size() >= 35 ? LONG_LEVEL : SHORT_LEVEL;
 
 	updateControllerData(controller, time, 0);
 }
@@ -164,7 +164,7 @@ void Board::addStickToList(StickType colour, float angle, float len, float x, fl
 	{
 		if (stick.checkAndUpdateIntersection(*it))
 		{
-			it->updateSticksBlocked(&stick);
+			it->updateSticksBlocking(&stick);
 		}
 	}
 	
@@ -266,6 +266,11 @@ void Board::saveBoardAndCopyToText(std::ofstream& boardFile, int score, float le
 		boardFile << info;
 	}
 
+}
+//-----------------------------------------------------------------------------
+int Board::getNumOfSticks()const
+{
+	return m_sticks.size();
 }
 
 

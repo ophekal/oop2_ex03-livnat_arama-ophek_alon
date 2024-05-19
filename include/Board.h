@@ -29,6 +29,7 @@ public:
 	//void updateSticksList(auto needToRemoveIt);
 	void updateRemoveable();
 	int getRemovableSticks()const;
+	int getNumOfSticks()const;
 	//void deleteStick(auto needToRemoveIt);
 
 private:

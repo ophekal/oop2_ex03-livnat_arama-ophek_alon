@@ -45,7 +45,7 @@ void Controller::setData(float time, int score)
 	m_totalScore = score;
 	m_levelTime = time;
 	m_removableSticks = m_board.getRemovableSticks();
-	m_sticksLeft = Stick::getCount();
+	m_sticksLeft = m_board.getNumOfSticks();// Stick::getCount();
 }
 
 //------------------------------------------------------------------------------
@@ -57,9 +57,8 @@ void Controller::startGame(sf::RenderWindow& window,bool load, bool& musicOn)
 
 	m_clock.setClock(m_levelTime, m_levelOver);
 
-	while (/*!m_levelOver || */Stick::getCount() == 0)
+	while (/*!m_levelOver || *//*Stick::getCount() == 0*/m_board.getNumOfSticks()!=0)
 	{
-		std::cout << "num of sticks: " << Stick::getCount()<<"\n";
 		print(window);
 		if (m_levelOver)
 		{
