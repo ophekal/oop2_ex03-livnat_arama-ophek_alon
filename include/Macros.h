@@ -123,9 +123,9 @@ const float HINT_Y = 645;
 
 
 
-const float I_SOUND_X = 50;
+const float I_SOUND_X = 70;
 const float I_SOUND_Y = 855;
-const float HOME_X = 335;
+const float HOME_X = 305;
 const float HOME_Y = 855;
 //const float RESTART_X = 285;
 //const float RESTART_Y = 900;

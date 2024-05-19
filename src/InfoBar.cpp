@@ -12,6 +12,10 @@ InfoBar::InfoBar()
 	m_infoBackground.setTexture(HandleResources::instance().getBackgroundTexture(B_INFOBAR));
 
 	m_text.setFont(*HandleResources::instance().getFont());
+	m_text.setString("Information");
+	m_text.setCharacterSize(50);
+	m_text.setFillColor(sf::Color::Black);
+	m_text.setPosition(75, 50);
 
 	m_infoBar.resize(8);
 	m_infoBar[0].updateInfoItem(*HandleResources::instance().getInfoBarTexture(B_SAVE), INFO_X, SAVE_Y, INFO_SIZE);
@@ -22,13 +26,6 @@ InfoBar::InfoBar()
 	m_infoBar[5].updateInfoItem(*HandleResources::instance().getInfoBarTexture(B_LEFT), INFO_X, LEFT_Y, INFO_SIZE);
 	m_infoBar[6].updateInfoItem(*HandleResources::instance().getInfoBarTexture(B_SCORE), INFO_X, SCORE_Y, INFO_SIZE);
 	m_infoBar[7].updateInfoItem(*HandleResources::instance().getInfoBarTexture(B_HINT), INFO_X, HINT_Y, INFO_SIZE);
-	//m_infoBar[7].updateInfoItem(*HandleResources::instance().getInfoBarTexture(B_INFO), INFO_X, INFO_Y, INFO_SIZE);
-	//m_infoBar[3].updateButton(*HandleResources::instance().getInfoBarTexture(B_KEYS), INFO_X, KEYS_Y, INFO_SIZE);
-	//m_infoBar[4].updateButton(*HandleResources::instance().getInfoBarTexture(B_HOME), HOME_X, HOME_Y, SOUND_SIZE);
-	//m_infoBar[5].updateButton(*HandleResources::instance().getBackgroundTexture(B_SOUND), I_SOUND_X, I_SOUND_Y, SOUND_SIZE);
-	//m_infoBar[6].updateButton(*HandleResources::instance().getInfoBarTexture(B_SCORE), INFO_X, SCORE_Y, INFO_SIZE);
-	//m_infoBar[7].updateButton(*HandleResources::instance().getInfoBarTexture(B_RESTART), RESTART_X, RESTART_Y, SOUND_SIZE);
-
 }
 
 //----------------------------------------------------------------------------------------------------------------------------
@@ -64,8 +61,9 @@ void InfoBar::updateSticksLeft(int sticksLeft)
 //----------------------------------------------------------------------------------------------------------------------------
 void InfoBar::printInfoBar(sf::RenderWindow& window)const
 {
-
 	window.draw(m_infoBackground);
+	window.draw(m_text);
+
 	for (auto index = 0; index < m_infoBar.size(); index++)
 	{
 		m_infoBar[index].printInfoItem(window);
