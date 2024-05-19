@@ -10,7 +10,10 @@ InfoBar::InfoBar()
 {
 	m_infoBackground.setPosition({ INFO_START_X ,INFO_START_Y });
 	m_infoBackground.setTexture(HandleResources::instance().getBackgroundTexture(B_INFOBAR));
-	//m_infoBar.resize(8);
+	m_infoBar.resize(3);
+	m_infoBar[0].updateInfoItem(*HandleResources::instance().getInfoBarTexture(B_SAVE), SAVE_X, SOUND_Y, SOUND_SIZE);
+	m_infoBar[1].updateInfoItem(*HandleResources::instance().getBackgroundTexture(B_SOUND), I_SOUND_X, I_SOUND_Y, SOUND_SIZE);
+	m_infoBar[2].updateInfoItem(*HandleResources::instance().getInfoBarTexture(B_HOME), HOME_X, HOME_Y, SOUND_SIZE);
 	//m_infoBar[0].updateButton(*HandleResources::instance().getInfoBarTexture(B_INFO), INFO_X, INFO_Y, INFO_SIZE);
 	//m_infoBar[1].updateButton(*HandleResources::instance().getInfoBarTexture(B_LEVEL), INFO_X, LEVEL_Y, INFO_SIZE);
 	//m_infoBar[2].updateButton(*HandleResources::instance().getInfoBarTexture(B_LIVES), INFO_X, LIVES_Y, INFO_SIZE);
@@ -23,23 +26,23 @@ InfoBar::InfoBar()
 }
 
 ////----------------------------------------------------------------------------------------------------------------------------
-//void InfoBar::setInfoBar(int levelNum, int score, int key, int lives, bool& musicOn)
-//{
-//	updateLife(lives);
-//	updateScore(score);
-//	updateKey(key);
-//	updateLevel(levelNum);
-//	checkMusic(musicOn);
-//}
-//
+void InfoBar::setInfoBar(int score, bool& musicOn)
+{
+	//updateLife(lives);
+	updateScore(score);
+	//updateKey(key);
+	//updateLevel(levelNum);
+	checkMusic(musicOn);
+}
+
 //----------------------------------------------------------------------------------------------------------------------------
 void InfoBar::printInfoBar(sf::RenderWindow& window)const
 {
 	window.draw(m_infoBackground);
-	//for (auto index = 0; index < m_infoBar.size(); index++)
-	//{
-	//	m_infoBar[index].printButton(window);
-	//}
+	for (auto index = 0; index < m_infoBar.size(); index++)
+	{
+		m_infoBar[index].printInfoItem(window);
+	}
 }
 
 ////----------------------------------------------------------------------------------------------------------------------------
@@ -50,12 +53,12 @@ void InfoBar::printInfoBar(sf::RenderWindow& window)const
 //}
 //
 ////----------------------------------------------------------------------------------------------------------------------------
-//void InfoBar::updateScore(int score)
-//{
-//	m_score = std::to_string(score);
-//	m_infoBar[6].setText(m_score);
-//}
-//
+void InfoBar::updateScore(int score)
+{
+	m_score = std::to_string(score);
+	m_infoBar[1].setText(m_score);
+}
+
 ////----------------------------------------------------------------------------------------------------------------------------
 //void InfoBar::updateKey(int keys)
 //{
@@ -70,58 +73,61 @@ void InfoBar::printInfoBar(sf::RenderWindow& window)const
 //	m_infoBar[1].setText(m_numOfLevel);
 //}
 //
-////----------------------------------------------------------------------------------------------------------------------------
-//void InfoBar::handleClick(const sf::Vector2f& location, bool& gameOver, bool& levelOver,
-//	std::unique_ptr<MovingObjects>& mouse, bool& musicOn)
-//{
-//	if (m_infoBar[4].getRectangleButton().getGlobalBounds().contains(location))
-//	{
-//		//the player pressed on home
-//		gameOver = true;
-//		return;
-//	}
-//	else if (m_infoBar[5].getRectangleButton().getGlobalBounds().contains(location))
-//	{
-//		updateMusic(musicOn);
-//	}
-//	else if (m_infoBar[7].getRectangleButton().getGlobalBounds().contains(location))
-//	{
-//		levelOver = true;
-//		Mouse* mousePtr = dynamic_cast<Mouse*>(mouse.get());
-//		if (mousePtr != nullptr)
-//		{
-//			mousePtr->setLives(mousePtr->getLives() + 1);	//in order for life not to change when restarting level
-//		}
-//		return;
-//	}
-//}
-//
-////----------------------------------------------------------------------------------------------------------------------------
-//void InfoBar::updateMusic(bool& musicOn)
-//{
-//	if (musicOn)
-//	{
-//		musicOn = false;
-//		m_infoBar[5].updateButton(*HandleResources::instance().getBackgroundTexture(B_MUTE), I_SOUND_X, I_SOUND_Y, SOUND_SIZE);
-//		HandleResources::instance().stopMusic();
-//	}
-//	else
-//	{
-//		musicOn = true;
-//		m_infoBar[5].updateButton(*HandleResources::instance().getBackgroundTexture(B_SOUND), I_SOUND_X, I_SOUND_Y, SOUND_SIZE);
-//		HandleResources::instance().playMusic();
-//	}
-//}
-//
-////----------------------------------------------------------------------------------------------------------------------------
-//void InfoBar::checkMusic(const bool& musicOn)
-//{
-//	if (musicOn)
-//	{
-//		m_infoBar[5].updateButton(*HandleResources::instance().getBackgroundTexture(B_SOUND), I_SOUND_X, I_SOUND_Y, SOUND_SIZE);
-//	}
-//	else
-//	{
-//		m_infoBar[5].updateButton(*HandleResources::instance().getBackgroundTexture(B_MUTE), I_SOUND_X, I_SOUND_Y, SOUND_SIZE);
-//	}
-//}
+//----------------------------------------------------------------------------------------------------------------------------
+void InfoBar::handleClick(const sf::Vector2f& location, bool& levelOver, bool& musicOn)
+{
+	if (m_infoBar[2].getRectangleInfoItem().getGlobalBounds().contains(location))
+	{
+		//the player pressed on home
+		levelOver = true;
+		return;
+	}
+	else if (m_infoBar[1].getRectangleInfoItem().getGlobalBounds().contains(location))
+	{
+		updateMusic(musicOn);
+	}
+	else if (m_infoBar[0].getRectangleInfoItem().getGlobalBounds().contains(location))
+	{
+		//handleSave();
+	}
+	//else if (m_infoBar[7].getRectangleButton().getGlobalBounds().contains(location))
+	//{
+	//	levelOver = true;
+	//	Mouse* mousePtr = dynamic_cast<Mouse*>(mouse.get());
+	//	if (mousePtr != nullptr)
+	//	{
+	//		mousePtr->setLives(mousePtr->getLives() + 1);	//in order for life not to change when restarting level
+	//	}
+	//	return;
+	//}
+}
+
+//----------------------------------------------------------------------------------------------------------------------------
+void InfoBar::updateMusic(bool& musicOn)
+{
+	if (musicOn)
+	{
+		musicOn = false;
+		m_infoBar[1].updateInfoItem(*HandleResources::instance().getBackgroundTexture(B_MUTE), I_SOUND_X, I_SOUND_Y, SOUND_SIZE);
+		HandleResources::instance().stopMusic();
+	}
+	else
+	{
+		musicOn = true;
+		m_infoBar[1].updateInfoItem(*HandleResources::instance().getBackgroundTexture(B_SOUND), I_SOUND_X, I_SOUND_Y, SOUND_SIZE);
+		HandleResources::instance().playMusic();
+	}
+}
+
+//----------------------------------------------------------------------------------------------------------------------------
+void InfoBar::checkMusic(const bool& musicOn)
+{
+	if (musicOn)
+	{
+		m_infoBar[1].updateInfoItem(*HandleResources::instance().getBackgroundTexture(B_SOUND), I_SOUND_X, I_SOUND_Y, SOUND_SIZE);
+	}
+	else
+	{
+		m_infoBar[1].updateInfoItem(*HandleResources::instance().getBackgroundTexture(B_MUTE), I_SOUND_X, I_SOUND_Y, SOUND_SIZE);
+	}
+}

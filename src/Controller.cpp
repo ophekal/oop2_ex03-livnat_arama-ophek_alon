@@ -193,7 +193,7 @@ void Controller::handleClick(const sf::Event::MouseButtonEvent& event,
 {
 	auto location = window.mapPixelToCoords({ event.x,event.y });
 
-	handleClickInfoBar(location);
+	handleClickInfoBar(location, musicOn);
 	handleClickBoard(location);
 }
 //---------------------------------------------------------------------------------------
@@ -207,20 +207,21 @@ void Controller::handleClickBoard(const sf::Vector2f& location)
 	}
 }
 //---------------------------------------------------------------------------------------
-void Controller::handleClickInfoBar(const sf::Vector2f& location)
+void Controller::handleClickInfoBar(const sf::Vector2f& location, bool& musicOn)
 {
 	//checking if we're in the tool bar
 	if (location.y >= 0 && location.y <= 950  &&	//the range of Y in the toolbar
 		location.x >= 0 && location.x <= 450)						//the range of X in the toolbar
 	{
-		//m_infoBar.handleClick(location, m_gameOver, m_levelOver, m_mouse, musicOn);
+		m_infoBar.handleClick(location, m_levelOver, musicOn);
 	}
 	
 }
 //----------------------------------------------------------------------------------------
 void Controller::updateInfoBar(bool& musicOn)
 {
-	
+
+	m_infoBar.setInfoBar(m_totalScore, musicOn);
 	//int keys = 0;
 	//int lives = 0;
 

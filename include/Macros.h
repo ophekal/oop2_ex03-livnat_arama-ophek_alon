@@ -96,10 +96,10 @@ enum Bar
 {
 	B_TIME,
 	B_SAVE,
+	B_HOME,
 	B_INFO,
 	B_PICKEDUP,
 	B_FREE,
-	B_HOME,
 	B_SCORE
 	
 	//B_RESTART
