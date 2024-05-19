@@ -12,7 +12,7 @@ public:
 	void printInfoBar(sf::RenderWindow& window)const;
 	void updateScore(int score);
 	void setInfoBar(int score, bool& musicOn);
-	void handleClick(const sf::Vector2f& location, bool& levelOver, bool& musicOn);
+	void handleClick(const sf::Vector2f& location, bool& levelOver,bool& pressedSave, bool& musicOn);
 	void updateMusic(bool& musicOn);
 	void checkMusic(const bool& musicOn);
 

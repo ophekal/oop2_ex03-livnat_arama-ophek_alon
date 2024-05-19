@@ -74,7 +74,7 @@ void InfoBar::updateScore(int score)
 //}
 //
 //----------------------------------------------------------------------------------------------------------------------------
-void InfoBar::handleClick(const sf::Vector2f& location, bool& levelOver, bool& musicOn)
+void InfoBar::handleClick(const sf::Vector2f& location, bool& levelOver,bool& pressedSave, bool& musicOn)
 {
 	if (m_infoBar[2].getRectangleInfoItem().getGlobalBounds().contains(location))
 	{
@@ -88,6 +88,8 @@ void InfoBar::handleClick(const sf::Vector2f& location, bool& levelOver, bool& m
 	}
 	else if (m_infoBar[0].getRectangleInfoItem().getGlobalBounds().contains(location))
 	{
+		pressedSave = true;
+		return;
 		//handleSave();
 	}
 	//else if (m_infoBar[7].getRectangleButton().getGlobalBounds().contains(location))
