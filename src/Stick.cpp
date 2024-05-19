@@ -176,3 +176,12 @@ void Stick::setInRemoveable(bool boolValue)
 {
     m_inRemoveable = boolValue;
 }
+//--------------------------------------------------------------------------------
+std::string Stick::getStickInfo()const
+{
+    std::string stickInfo = std::to_string(m_colour) + " " + std::to_string(m_angle) + std::to_string(m_length)
+                            + " " +std::to_string(m_startingPoint.x) + " "+ std::to_string(m_startingPoint.y) + "\n";
+
+    return stickInfo;
+
+}

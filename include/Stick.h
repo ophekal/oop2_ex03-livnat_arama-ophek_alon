@@ -22,7 +22,9 @@ public:
     void handleStickRemove();
     bool getInRemoveable()const;
     void setInRemoveable(bool boolValue);
+    std::string getStickInfo()const;
     static int getCount();
+  
 
 private:
     sf::RectangleShape m_stick;

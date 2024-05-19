@@ -227,7 +227,7 @@ void Controller::handleClickInfoBar(const sf::Vector2f& location, bool& musicOn)
 	}
 	if (pressedSave)
 	{
-		m_board.handlePressedSave();
+		m_board.handlePressedSave(m_totalScore, m_levelTime);
 	}
 	
 }

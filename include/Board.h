@@ -23,8 +23,9 @@ public:
 	void generateGame(Controller& controller);
 	void createRandomStick();
 	void updateControllerData(Controller& controller, float time, int score) const;
-	void addStickToList(StickType colour, float angle, int len, float x, float y);
-	void handlePressedSave();
+	void addStickToList(StickType colour, float angle, float len, float x, float y);
+	void handlePressedSave(int scorefloat, float levelTime)const;
+	void saveBoardAndCopyToText(std::ofstream& boardFile, int score, float levelTime)const;
 	//void updateSticksList(auto needToRemoveIt);
 	void updateRemoveable();
 	//void deleteStick(auto needToRemoveIt);

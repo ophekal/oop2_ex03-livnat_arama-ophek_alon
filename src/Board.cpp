@@ -67,8 +67,8 @@ void Board::loadAndRunFromExisting(Controller& controller)
 				}
 				else
 				{
-					float angle, x, y;
-					int colour, len;
+					float angle, x, y,len;
+					int colour;
 					if (!(iss >> colour >> angle >> len >> x >> y))
 					{
 						//throw  worng input, if range isn't good, x-y arent goot etc
@@ -144,7 +144,7 @@ void Board::updateControllerData(Controller& controller, float time, int score) 
 
 //-------------------------------------------------------------------------------------
 //This function is responsible of adding the stick to the list of sticks
-void Board::addStickToList(StickType colour, float angle, int len, float x, float y)
+void Board::addStickToList(StickType colour, float angle, float len, float x, float y)
 {
 	sf::Vector2f point(x,y);
 	Stick stick(HandleResources::instance().getObjectTexture(colour), Colour(colour), angle, point, len);
@@ -225,26 +225,38 @@ void Board::printBoard(sf::RenderWindow& window)
 	}
 }
 //-------------------------------------------------------------------------------------
-void Board::handlePressedSave()
+void Board::handlePressedSave(int score, float levelTime)const
 {
+	std::ofstream boardFile;
+	if (std::filesystem::exists("level.txt"))
+	{
+		std::remove("level.txt");
+	}
+
+	boardFile.open("level.txt");
+	
+	// try and catch
+	if (boardFile.is_open())
+	{
+		saveBoardAndCopyToText(boardFile, score, levelTime);
+		//levelExists = true;
+	}
+}
+
+//---------------------------------------------------------------------------------------
+void Board::saveBoardAndCopyToText(std::ofstream& boardFile, int score, float levelTime)const
+{
+	std::string info;
+
+	info = std::to_string(levelTime) + " " + std::to_string(score)+ "\n";
+	boardFile << info;
+
+	for (auto it = m_sticks.begin(); it != m_sticks.end(); it++)
+	{
+		info = it->getStickInfo();
+		boardFile << info;
+	}
 
 }
-//std::ofstream board;
-//
-//if (pressed == B_SAVE)
-//{
-//	board.open("Board.txt");
-//
-//	if (board.is_open())
-//	{
-//		m_board.saveBoardAndCopyToText(board);
-//		levelExists = true;
-//	}
-//}
-//else if (pressed == B_NEWPAGE)
-//{
-//	levelExists = false;
-//	std::remove("Board.txt");
-//	m_window.close();
-//	return;
-//}
+
+
