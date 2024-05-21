@@ -103,7 +103,7 @@ void Board::generateGame(Controller& controller)
 	float boardArea = (BOARD_WID * BOARD_HIG )/ 10000.0f;
 
 	// Generate a random number of sticks proportional to the size of the board
-	int numSticks = randomFloat(15, 35); // randomFloat(0.1f, 0.5f)* boardArea; // Adjust the range according to your preference
+	int numSticks = randomFloat(15, 35);
 
 	// Create the sticks and insert them into the list
 	for (int i = 0; i < numSticks; ++i) 
@@ -176,17 +176,18 @@ void Board::addStickToList(Stick& stick)/*StickType colour, float angle, float l
 	//sf::Vector2f point(x,y);
 	//Stick stick(HandleResources::instance().getObjectTexture(colour), Colour(colour), angle, point, len);
 	
-	m_sticks.push_back(stick);
 	
 	//go over all the prev sticks and check if this stick block them
-	for (auto it = m_sticks.begin(); it != std::prev(m_sticks.end()); it++)
+	for (auto it = m_sticks.begin(); it != m_sticks.end(); it++)
 	{
 		if (stick.checkAndUpdateIntersection(*it))
 		{
 			it->updateSticksBlocking(&stick);
 		}
 	}
-	
+
+	m_sticks.push_back(stick);
+
 }
 //-----------------------------------------------------------------------------
 void Board::updateRemoveable()
@@ -201,45 +202,45 @@ void Board::updateRemoveable()
 		}
 	}
 }
-//
-////-----------------------------------------------------------------------------
-////after the function delete the stick from the list
-//void Board::updateSticksList(auto needToRemoveIt)
-//{
-//	// change the sticks that this stick blocked
-//	*needToRemoveIt.handleStickRemove();
-//
-//	// update the multimap - delete the pointer to the stick 
-//	deleteStick(needToRemoveIt);
-//
-//	// update the multimap
-//	//need to check if the value allready in or this doesnt matter?
-//	updateRemoveable();
-//
-//}
-////-----------------------------------------------------------------------------
-//
-//void Board::deleteStick(auto needToRemoveIt)
-//{
-//
-//	// Iterate through the list and remove the object you want to delete
-//	Stick* objectToDelete = m_sticks.remove(needToRemove);
-//
-//	// Now, remove the pointers to the object from the multimap
-//	for (auto it = objectMap.begin(); it != objectMap.end(); ) {
-//		if (it->second == objectToDelete) {
-//			it = objectMap.erase(it);
-//		}
-//		else {
-//			++it;
-//		}
-//	}
-//
-//	// Finally, delete the object itself
-//	delete objectToDelete;
-//
-//}
-//
+
+//-----------------------------------------------------------------------------
+//after the function delete the stick from the list
+void Board::updateDataAndDeleteStick( std::list<Stick>::iterator& needToRemoveIt)
+{
+	// change the sticks that this stick blocked
+	needToRemoveIt->handleStickRemove();
+
+	// update the multimap - delete the pointer to the stick 
+	deleteStick(needToRemoveIt);
+
+	// update the multimap
+	updateRemoveable();
+
+}
+//-----------------------------------------------------------------------------
+// remove the object you want to delete
+
+void Board::deleteStick(std::list<Stick>::iterator needToRemoveIt)
+{
+	Stick* objectToDelete = &(*needToRemoveIt);
+
+	// remove the element from the list using erase
+	m_sticks.erase(needToRemoveIt);
+
+	// remove all pointers to the object from the multimap
+	for (auto it = m_removeable.begin(); it != m_removeable.end(); ++it) 
+	{
+		if (it->second == objectToDelete) 
+		{
+			it = m_removeable.erase(it);
+			break;
+		}
+	}
+
+	// delete the object itself
+	//delete objectToDelete;
+}
+
 //-------------------------------------------------------------------------------------
 void Board::printBoard(sf::RenderWindow& window)
 {
@@ -253,7 +254,7 @@ void Board::printBoard(sf::RenderWindow& window)
 	}
 }
 //-------------------------------------------------------------------------------------
-void Board::handlePressedSave(int score, float levelTime)const
+void Board::handlePressedSave(int score, sf::Clock levelTime) const
 {
 	std::ofstream boardFile;
 	if (std::filesystem::exists("level.txt"))
@@ -295,5 +296,25 @@ int Board::getNumOfSticks()const
 void Board::handlePressedHint()
 {
 
+}
+
+//-----------------------------------------------------------------------------
+void Board::checkIfPressedOnStick(const sf::Vector2f& location, int& score, int& picked)
+{
+	//go over the sticks list and check if we pressed one of them
+	for (auto it = m_sticks.begin(); it != m_sticks.end(); it++)
+	{
+		if (it->pressed(location) && it->getInRemoveable())
+		{
+			score += it->getStickScore();
+			updateDataAndDeleteStick(it);
+			picked++;
+			return;
+		}
+		else if (it->pressed(location) && !it->getInRemoveable())
+		{
+			//highlightBlockingSticks();
+		}
+	}
 }
 

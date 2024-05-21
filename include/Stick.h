@@ -23,7 +23,10 @@ public:
     bool getInRemoveable()const;
     void setInRemoveable(bool boolValue);
     std::string getStickInfo()const;
-    void updateSticksBlocking(Stick* stick); 
+    void updateSticksBlocking(Stick* stick);
+    bool pressed(const sf::Vector2f& location);
+    void eraseFromBlocking(Stick* stickToDelete);
+
   
 
 private:

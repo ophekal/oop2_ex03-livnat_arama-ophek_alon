@@ -45,7 +45,7 @@ void Controller::setData(float time, int score)
 	m_totalScore = score;
 	m_levelTime = time;
 	m_removableSticks = m_board.getRemovableSticks();
-	m_sticksLeft = m_board.getNumOfSticks();// Stick::getCount();
+	m_sticksLeft = m_board.getNumOfSticks();
 }
 
 //------------------------------------------------------------------------------
@@ -57,7 +57,7 @@ void Controller::startGame(sf::RenderWindow& window,bool load, bool& musicOn)
 
 	m_clock.setClock(m_levelTime, m_levelOver);
 
-	while (/*!m_levelOver || *//*Stick::getCount() == 0*/m_board.getNumOfSticks()!=0)
+	while (m_board.getNumOfSticks()!=0)
 	{
 		print(window);
 		if (m_levelOver)
@@ -71,6 +71,8 @@ void Controller::startGame(sf::RenderWindow& window,bool load, bool& musicOn)
 		updateInfoBar(musicOn);
 	}
 
+	m_levelOver = true;
+	//we need to add the printing of the score
 }
 
 //----------------------------------------------------------------------------------------
@@ -213,7 +215,9 @@ void Controller::handleClickBoard(const sf::Vector2f& location)
 	if (location.y >= 0 && location.y <= 950 &&	                  
 		location.x >= 450 && location.x <= 1500)						
 	{
-		
+		m_board.checkIfPressedOnStick(location, m_totalScore, m_sticksPicked);
+
+		//sticks left and removeable sticks updated here
 	}
 }
 //---------------------------------------------------------------------------------------
@@ -230,7 +234,7 @@ void Controller::handleClickInfoBar(const sf::Vector2f& location, bool& musicOn)
 	}
 	if (pressedSave)
 	{
-		m_board.handlePressedSave(m_totalScore, m_levelTime);
+		m_board.handlePressedSave(m_totalScore, m_clock);
 	}
 	else if (pressedHint)
 	{
@@ -243,16 +247,8 @@ void Controller::updateInfoBar(bool& musicOn)
 {
 
 	m_infoBar.setInfoBar(m_totalScore,m_removableSticks,m_sticksPicked,m_sticksLeft, musicOn);
-	//int keys = 0;
-	//int lives = 0;
-
-	//if (mousePtr != nullptr)
-	//{
-	//	keys = mousePtr->getKeys();
-	//	m_totalScore = mousePtr->getScore();
-	//	lives = mousePtr->getLives();
-	//}
-	//m_infoBar.setInfoBar(m_levelNum, m_totalScore, keys, lives, musicOn);
+	m_removableSticks = m_board.getRemovableSticks();
+	m_sticksLeft = m_board.getNumOfSticks();
 }
 
 ////----------------------------------------------------------------------------------------

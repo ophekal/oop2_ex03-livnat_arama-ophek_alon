@@ -153,8 +153,20 @@ void Stick::handleStickRemove()
     for (auto i = 0; i < m_sticksBlocked.size(); i++)
     {
         m_sticksBlocked[i]->setBlockThisStick(-1);
+        m_sticksBlocked[i]->eraseFromBlocking(this);
     }
 }
+
+//--------------------------------------------------------------------------------
+void Stick::eraseFromBlocking(Stick* stickToDelete)
+{
+    auto it = std::find(m_sticksBlocking.begin(), m_sticksBlocking.end(), stickToDelete);
+    if (it != m_sticksBlocking.end()) 
+    {
+        m_sticksBlocking.erase(it);  // Remove the pointer from the vector
+    }
+}
+
 //--------------------------------------------------------------------------------
 bool Stick::getInRemoveable()const
 {
@@ -178,4 +190,13 @@ std::string Stick::getStickInfo()const
 void Stick::updateSticksBlocked(Stick* stick)
 {
     m_sticksBlocked.push_back(stick);
+}
+
+//----------------------------------------------------------------------------------
+//This function checks if the user pressed on a stick
+
+bool Stick::pressed(const sf::Vector2f& location)
+{
+    const auto transformedPoint = m_stick.getTransform().getInverse().transformPoint(location);
+    return m_stick.getLocalBounds().contains(transformedPoint);
 }

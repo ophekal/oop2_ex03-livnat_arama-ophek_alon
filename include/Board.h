@@ -27,11 +27,12 @@ public:
 	void handlePressedSave(int scorefloat, float levelTime)const;
 	void handlePressedHint();
 	void saveBoardAndCopyToText(std::ofstream& boardFile, int score, float levelTime)const;
-	//void updateSticksList(auto needToRemoveIt);
+	void updateDataAndDeleteStick(std::list<Stick>::iterator& needToRemoveIt);
 	void updateRemoveable();
 	int getRemovableSticks()const;
 	int getNumOfSticks()const;
-	//void deleteStick(auto needToRemoveIt);
+	void checkIfPressedOnStick(const sf::Vector2f& location, int& score, int& picked);
+	void deleteStick(std::list<Stick>::iterator needToRemoveIt);
 
 private:
 
