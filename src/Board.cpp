@@ -103,7 +103,7 @@ void Board::generateGame(Controller& controller)
 	float boardArea = (BOARD_WID * BOARD_HIG )/ 10000.0f;
 
 	// Generate a random number of sticks proportional to the size of the board
-	int numSticks = randomFloat(25, 50); // randomFloat(0.1f, 0.5f)* boardArea; // Adjust the range according to your preference
+	int numSticks = randomFloat(15, 35); // randomFloat(0.1f, 0.5f)* boardArea; // Adjust the range according to your preference
 
 	// Create the sticks and insert them into the list
 	for (int i = 0; i < numSticks; ++i) 
@@ -114,7 +114,7 @@ void Board::generateGame(Controller& controller)
 	//after create the list check for the removeable sticks
 	updateRemoveable();	
 
-	float time = m_sticks.size() >= 35 ? LONG_LEVEL : SHORT_LEVEL;
+	float time = m_sticks.size() >= 25 ? LONG_LEVEL : SHORT_LEVEL;
 
 	updateControllerData(controller, time, 0);
 }
