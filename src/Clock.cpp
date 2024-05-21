@@ -28,6 +28,12 @@ sf::Clock Clock::getClock()const
 {
 	return m_clock;
 }
+
+//-----------------------------------------------------------------------
+float Clock::getTimer()const
+{
+	return m_timer;
+}
 //-----------------------------------------------------------------------
 void Clock::updateTime(bool& levelOver)
 {

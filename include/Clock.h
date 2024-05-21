@@ -12,6 +12,7 @@ public:
 	void printClock(sf::RenderWindow& window, bool& levelOver);
 	void updateTime(bool& levelOver);
 	sf::Clock getClock()const;
+	float getTimer()const;
 
 private:
 	sf::Clock m_clock;

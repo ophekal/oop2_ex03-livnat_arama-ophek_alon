@@ -254,7 +254,7 @@ void Board::printBoard(sf::RenderWindow& window)
 	}
 }
 //-------------------------------------------------------------------------------------
-void Board::handlePressedSave(int score, sf::Clock levelTime) const
+void Board::handlePressedSave(int score,float levelTime) const
 {
 	std::ofstream boardFile;
 	if (std::filesystem::exists("level.txt"))
