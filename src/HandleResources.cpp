@@ -52,7 +52,7 @@ void HandleResources::updateBackgroundVector()
 	m_backgroundsTextures[B_SOUND].loadFromFile("music.png");
 	m_backgroundsTextures[B_MUTE].loadFromFile("mute.png");
 	m_backgroundsTextures[B_INFOBAR].loadFromFile("infoBar.png");
-	m_backgroundsTextures[B_FINALSCORE].loadFromFile("scoreFeddback.png");
+	m_backgroundsTextures[B_FINALSCORE].loadFromFile("scoreFeedback.jpg");
 }
 
 //-------------------------------------------------------------------------

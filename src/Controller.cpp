@@ -23,6 +23,7 @@ void Controller::run(sf::RenderWindow& window, bool& load, bool& musicOn)
 
 		if (m_levelOver)
 		{
+			printFinalScore(window);
 			return;
 		}
 		//if (m_gameOver)
@@ -32,8 +33,6 @@ void Controller::run(sf::RenderWindow& window, bool& load, bool& musicOn)
 		//}
 
 		//printFeedback(*HandleResources::instance().getScreenTexture(S_WIN), window, background, G_WIN);
-		printFinalScore(window);
-		//return;
 	}
 }
 
@@ -156,39 +155,7 @@ void Controller::print(sf::RenderWindow& window)
 //}
 //
 //
-////----------------------------------------------------------------------------------------
-//void Controller::handleLevelOver(sf::RenderWindow& window, const sf::Sprite& background, bool& musicOn)
-//{
-//	printFeedback(*HandleResources::instance().getScreenTexture(S_TRYAGAIN), window, background, G_LOST);
-//
-//	Mouse* mousePtr = dynamic_cast<Mouse*>(m_mouse.get());
-//	int prevLives = 0;
-//
-//	if (mousePtr != nullptr)
-//	{
-//		prevLives = mousePtr->getLives() - 1;
-//		if (prevLives == 0)
-//		{
-//			handleExit(window, background);
-//			return;
-//		}
-//	}
-//
-//	// load the same level again with all the objects
-//	m_board.reset();
-//	m_cats.clear();
-//	m_board.updateBoard(m_cats, m_mouse, m_levelTime);
-//
-//	Mouse* newMousePtr = dynamic_cast<Mouse*>(m_mouse.get());
-//	if (newMousePtr != nullptr)
-//	{
-//		newMousePtr->setLives(prevLives);
-//		newMousePtr->setScore(m_prevLevelsScore);
-//	}
-//	updateInfoBar(musicOn);
-//	m_clock.setClock(m_levelTime, m_levelOver);
-//}
-//
+
 ////----------------------------------------------------------------------------------------
 //void Controller::handleExit(sf::RenderWindow& window, const sf::Sprite& background)
 //{
@@ -208,7 +175,7 @@ void Controller::handleClick(const sf::Event::MouseButtonEvent& event,
 //---------------------------------------------------------------------------------------
 void Controller::handleClickBoard(const sf::Vector2f& location)
 {
-	//checking if we're in the tool bar
+	//checking if we're inside the board
 	if (location.y >= 0 && location.y <= 950 &&	                  
 		location.x >= 450 && location.x <= 1500)						
 	{
@@ -248,30 +215,6 @@ void Controller::updateInfoBar(bool& musicOn)
 	m_sticksLeft = m_board.getNumOfSticks();
 }
 
-////----------------------------------------------------------------------------------------
-//void Controller::updateScore()
-//{
-//	
-//}
-//
-////----------------------------------------------------------------------------------------
-//void Controller::printFeedback(const sf::Texture& feedback,
-//	sf::RenderWindow& window,
-//	const sf::Sprite& background, GameSound sound)const
-//{
-//	sf::sleep(sf::seconds(1));
-//	sf::Sprite sprite(feedback);
-//	sprite.setPosition(window.getSize().x / 2.0f - sprite.getLocalBounds().width / 2.0f,
-//		window.getSize().y / 2.0f - sprite.getLocalBounds().height / 2.0f);
-//
-//	window.clear();
-//	window.draw(background);
-//	HandleResources::instance().playSound(sound);
-//	window.draw(sprite);
-//	window.display();
-//	sf::sleep(sf::seconds(1));
-//}
-//
 //----------------------------------------------------------------------------------------
 void Controller::printFinalScore(sf::RenderWindow& window)
 {
@@ -292,7 +235,7 @@ void Controller::printFinalScore(sf::RenderWindow& window)
 	// Set the position of the text to be centered within the rectangle
 	sf::FloatRect textBounds = printText.getLocalBounds();
 	float textX = scorePic.getPosition().x + (scorePic.getGlobalBounds().width - textBounds.width) / 2;
-	float textY = scorePic.getPosition().y + (scorePic.getGlobalBounds().height - textBounds.height) / 4;
+	float textY = scorePic.getPosition().y + (scorePic.getGlobalBounds().height - textBounds.height) / 2;
 	printText.setPosition(textX, textY);
 
 	window.clear();
