@@ -26,13 +26,6 @@ void Controller::run(sf::RenderWindow& window, bool& load, bool& musicOn)
 			printFinalScore(window);
 			return;
 		}
-		//if (m_gameOver)
-		//{
-			//	printFinalScore(window);
-			//return;
-		//}
-
-		//printFeedback(*HandleResources::instance().getScreenTexture(S_WIN), window, background, G_WIN);
 	}
 }
 
@@ -69,7 +62,6 @@ void Controller::startGame(sf::RenderWindow& window,bool load, bool& musicOn)
 	}
 
 	m_levelOver = true;
-	//we need to add the printing of the score
 }
 
 //----------------------------------------------------------------------------------------
@@ -102,68 +94,6 @@ void Controller::print(sf::RenderWindow& window)
 	window.display();
 }
 
-////----------------------------------------------------------------------------------------
-//bool Controller::checkGameStatus(int numOfCheese, int numOfCats, sf::RenderWindow& window,
-//	const sf::Sprite& background, bool& musicOn)
-//{
-//	if (m_mouseDead)
-//	{
-//		Mouse* mousePtr = dynamic_cast<Mouse*>(m_mouse.get());
-//		if (mousePtr != nullptr)
-//		{
-//			if ((mousePtr->getLives()) == 0)
-//			{
-//				handleExit(window, background);
-//				return true;
-//			}
-//		}
-//
-//		//handle dead mouse while life isn't zero
-//		handleDeadMouse(window, background);
-//		return false;
-//	}
-//	return checkLevelStatus(numOfCheese, numOfCats, window, background, musicOn);
-//}
-//
-////----------------------------------------------------------------------------------------
-//bool Controller::checkLevelStatus(int numOfCheese, int numOfCats, sf::RenderWindow& window,
-//	const sf::Sprite& background, bool& musicOn)
-//{
-//	if (numOfCheese == 0) //to the next level
-//	{
-//		print(window, background);
-//		printFeedback(*HandleResources::instance().getScreenTexture(S_GOODJOB), window, background, G_WIN);
-//		Mouse* mousePtr = dynamic_cast<Mouse*>(m_mouse.get());
-//		if (mousePtr != nullptr)
-//		{
-//			m_totalScore = mousePtr->getScore();
-//			m_totalScore += 25;
-//			m_totalScore += (5 * numOfCats);
-//		}
-//		m_board.clear();
-//		m_cats.clear();
-//		return true;
-//	}
-//
-//	if (m_levelOver)
-//	{
-//		// start the level again
-//		handleLevelOver(window, background, musicOn);
-//		return false;
-//	}
-//
-//	return false;
-//}
-//
-//
-
-////----------------------------------------------------------------------------------------
-//void Controller::handleExit(sf::RenderWindow& window, const sf::Sprite& background)
-//{
-//	m_gameOver = true;
-//	printFeedback(*HandleResources::instance().getScreenTexture(S_GAMEOVER), window, background, G_LOST);
-//}
-//
 //----------------------------------------------------------------------------------------
 void Controller::handleClick(const sf::Event::MouseButtonEvent& event,
 	                         sf::RenderWindow& window, bool& musicOn)
@@ -180,9 +110,7 @@ void Controller::handleClickBoard(sf::RenderWindow& window,const sf::Vector2f& l
 	if (location.y >= 0 && location.y <= 950 &&	                  
 		location.x >= 450 && location.x <= 1500)						
 	{
-		m_board.checkIfPressedOnStick(window, *this,location, m_totalScore, m_sticksPicked);
-
-		//sticks left and removeable sticks updated here
+		m_board.checkIfPressedOnStick(window, *this,location);
 	}
 }
 //---------------------------------------------------------------------------------------
@@ -192,8 +120,8 @@ void Controller::handleClickInfoBar(sf::RenderWindow& window,const sf::Vector2f&
 	bool pressedHint = false;
 
 	//checking if we're in the tool bar
-	if (location.y >= 0 && location.y <= 950  &&	//the range of Y in the toolbar
-		location.x >= 0 && location.x <= 450)						//the range of X in the toolbar
+	if (location.y >= 0 && location.y <= 950  &&	
+		location.x >= 0 && location.x <= 450)						
 	{
 		m_infoBar.handleClick(location, m_levelOver, pressedSave,pressedHint, musicOn);
 	}
@@ -210,10 +138,7 @@ void Controller::handleClickInfoBar(sf::RenderWindow& window,const sf::Vector2f&
 //----------------------------------------------------------------------------------------
 void Controller::updateInfoBar(bool& musicOn)
 {
-
 	m_infoBar.setInfoBar(m_totalScore,m_removableSticks,m_sticksPicked,m_sticksLeft, musicOn);
-	m_removableSticks = m_board.getRemovableSticks();
-	m_sticksLeft = m_board.getNumOfSticks();
 }
 
 //----------------------------------------------------------------------------------------
@@ -244,4 +169,24 @@ void Controller::printFinalScore(sf::RenderWindow& window)
 	window.draw(printText);
 	window.display();
 	sf::sleep(sf::seconds(1.5));
+}
+//----------------------------------------------------------------------------------
+void Controller::setScore(int score)
+{
+	m_totalScore += score;
+}
+//---------------------------------------------------------------------------------
+void Controller::incStickPicked()
+{
+	m_sticksPicked ++;
+}
+//---------------------------------------------------------------------------------
+void Controller::setRemovable(int removable)
+{
+	m_removableSticks = removable;
+}
+//--------------------------------------------------------------------------------
+void Controller::decSticksLeft()
+{
+	m_sticksLeft--;
 }

@@ -168,11 +168,8 @@ int Board::getRemovableSticks()const
 }
 //-------------------------------------------------------------------------------------
 //This function is responsible of adding the stick to the list of sticks
-void Board::addStickToList(Stick& stick)/*StickType colour, float angle, float len, float x, float y)*/
-{
-	//sf::Vector2f point(x,y);
-	//Stick stick(HandleResources::instance().getObjectTexture(colour), Colour(colour), angle, point, len);
-	
+void Board::addStickToList(Stick& stick)
+{	
 	m_sticks.push_back(stick);
 	
 	//go over all the prev sticks and check if this stick block them
@@ -183,8 +180,6 @@ void Board::addStickToList(Stick& stick)/*StickType colour, float angle, float l
 			it->updateSticksBlocking(&m_sticks.back());
 		}
 	}
-
-
 }
 //-----------------------------------------------------------------------------
 void Board::updateRemoveable()
@@ -208,10 +203,6 @@ void Board::updateDataAndDeleteStick( std::list<Stick>::reverse_iterator& needTo
 
 	// update the multimap - delete the pointer to the stick 
 	deleteStick(needToRemoveIt);
-
-	// update the multimap
-	//updateRemoveable();
-
 }
 //-----------------------------------------------------------------------------
 // remove the object you want to delete
@@ -299,7 +290,7 @@ void Board::handlePressedHint(sf::RenderWindow& window, Controller& controller)
 }
 
 //-----------------------------------------------------------------------------
-void Board::checkIfPressedOnStick(sf::RenderWindow& window, Controller& controller, const sf::Vector2f& location, int& score, int& picked)
+void Board::checkIfPressedOnStick(sf::RenderWindow& window, Controller& controller, const sf::Vector2f& location)
 {
 	//go over the sticks list and check if we pressed one of them
 	for (auto it = m_sticks.rbegin(); it != m_sticks.rend(); it++)
@@ -307,12 +298,14 @@ void Board::checkIfPressedOnStick(sf::RenderWindow& window, Controller& controll
 		if (it->pressed(location) && it->isFree() )
 		{
 			HandleResources::instance().playSound(G_FREE);
-			score += it->getStickScore();
+			controller.setScore(it->getStickScore());
 			updateDataAndDeleteStick(it);
-			picked++;
+			controller.incStickPicked();
+			controller.setRemovable(m_removeable.size());
+			controller.decSticksLeft();
 			return;
 		}
-		else if (it->pressed(location) && !it->isFree() /*it->getNumOfBlockingMe() != 0*/)
+		else if (it->pressed(location) && !it->isFree())
 		{
 			HandleResources::instance().playSound(G_BLOCKED);
 			highlightBlockingSticks(window, controller, *it);
