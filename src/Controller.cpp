@@ -32,7 +32,7 @@ void Controller::run(sf::RenderWindow& window, bool& load, bool& musicOn)
 		//}
 
 		//printFeedback(*HandleResources::instance().getScreenTexture(S_WIN), window, background, G_WIN);
-		//printFinalScore(window);
+		printFinalScore(window);
 		//return;
 	}
 }
@@ -272,32 +272,32 @@ void Controller::updateInfoBar(bool& musicOn)
 //	sf::sleep(sf::seconds(1));
 //}
 //
-////----------------------------------------------------------------------------------------
-//void Controller::printFinalScore(sf::RenderWindow& window)
-//{
-//	sf::Sprite scorePic(*HandleResources::instance().getScreenTexture(S_FINALSCORE));
-//	sf::Vector2u textureSize = (*HandleResources::instance().getScreenTexture(S_FINALSCORE)).getSize();
-//
-//	//Scale the background sprite to fit the window
-//	scorePic.setScale((float)(window.getSize().x) / textureSize.x,
-//		(float)(window.getSize().y) / textureSize.y);
-//
-//	sf::Text printText;
-//	printText.setFont(*HandleResources::instance().getFont());
-//
-//	printText.setString(std::to_string(m_totalScore));
-//	printText.setCharacterSize(SCORE_TEXT_SIZE);
-//	printText.setFillColor(sf::Color::Black);
-//
-//	// Set the position of the text to be centered within the rectangle
-//	sf::FloatRect textBounds = printText.getLocalBounds();
-//	float textX = scorePic.getPosition().x + (scorePic.getGlobalBounds().width - textBounds.width) / 2;
-//	float textY = scorePic.getPosition().y + (scorePic.getGlobalBounds().height - textBounds.height) / 4;
-//	printText.setPosition(textX, textY);
-//
-//	window.clear();
-//	window.draw(scorePic);
-//	window.draw(printText);
-//	window.display();
-//	sf::sleep(sf::seconds(2));
-//}
+//----------------------------------------------------------------------------------------
+void Controller::printFinalScore(sf::RenderWindow& window)
+{
+	sf::Sprite scorePic(*HandleResources::instance().getBackgroundTexture(B_FINALSCORE));
+	sf::Vector2u textureSize = (*HandleResources::instance().getBackgroundTexture(B_FINALSCORE)).getSize();
+
+	//Scale the background sprite to fit the window
+	scorePic.setScale((float)(window.getSize().x) / textureSize.x,
+		(float)(window.getSize().y) / textureSize.y);
+
+	sf::Text printText;
+	printText.setFont(*HandleResources::instance().getFont());
+
+	printText.setString(std::to_string(m_totalScore));
+	printText.setCharacterSize(SCORE_TEXT_SIZE);
+	printText.setFillColor(sf::Color::Black);
+
+	// Set the position of the text to be centered within the rectangle
+	sf::FloatRect textBounds = printText.getLocalBounds();
+	float textX = scorePic.getPosition().x + (scorePic.getGlobalBounds().width - textBounds.width) / 2;
+	float textY = scorePic.getPosition().y + (scorePic.getGlobalBounds().height - textBounds.height) / 4;
+	printText.setPosition(textX, textY);
+
+	window.clear();
+	window.draw(scorePic);
+	window.draw(printText);
+	window.display();
+	sf::sleep(sf::seconds(2));
+}

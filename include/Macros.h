@@ -25,7 +25,8 @@ enum Background
 	B_GAMERULES,
 	B_SOUND,
 	B_MUTE,
-	B_INFOBAR
+	B_INFOBAR,
+	B_FINALSCORE
 };
 
 enum MenuButton
@@ -36,14 +37,6 @@ enum MenuButton
 	M_SOUND,
 	M_RULES
 };
-
-
-//enum Screen
-//{
-//	S_WIN,
-//	S_GAMEOVER,
-//	S_FINALSCORE
-//};
 
 enum Colour
 {

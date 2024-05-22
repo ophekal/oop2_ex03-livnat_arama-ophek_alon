@@ -172,17 +172,17 @@ void Board::addStickToList(Stick& stick)/*StickType colour, float angle, float l
 	//sf::Vector2f point(x,y);
 	//Stick stick(HandleResources::instance().getObjectTexture(colour), Colour(colour), angle, point, len);
 	
+	m_sticks.push_back(stick);
 	
 	//go over all the prev sticks and check if this stick block them
-	for (auto it = m_sticks.begin(); it != m_sticks.end(); it++)
+	for (auto it = m_sticks.begin(); it != std::prev(m_sticks.end()); it++)
 	{
 		if (stick.checkAndUpdateIntersection(*it))
 		{
-			it->updateSticksBlocking(&stick);
+			it->updateSticksBlocking(&m_sticks.back());
 		}
 	}
 
-	m_sticks.push_back(stick);
 
 }
 //-----------------------------------------------------------------------------
