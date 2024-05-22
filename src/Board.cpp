@@ -20,8 +20,8 @@ Board::Board()
 	m_board.setTexture(HandleResources::instance().getBackgroundTexture(B_BOARD));
 
 	// why it is not working???
-	m_board.setOutlineThickness(5.f);
-	m_board.setOutlineColor(sf::Color::Black);
+	//m_board.setOutlineThickness(5.f);
+	//m_board.setOutlineColor(sf::Color::Black);
 }
 
 //-------------------------------------------------------------------------------------
@@ -236,15 +236,14 @@ void Board::deleteStick(std::list<Stick>::iterator needToRemoveIt)
 			break;
 		}
 	}
-
-	// delete the object itself
-	//delete objectToDelete;
 }
 
 //-------------------------------------------------------------------------------------
 void Board::printBoard(sf::RenderWindow& window)
 {
-
+	// why it is not working???
+	m_board.setOutlineThickness(5.f);
+	m_board.setOutlineColor(sf::Color::Black);
 	window.draw(m_board);
 
 	//go over the sticks list and draw the sticks
