@@ -12,7 +12,7 @@ class Controller
 public:
 	Controller() = default;
 	void run(sf::RenderWindow& window, bool& load, bool& musicOn);
-	void setData(float time, int score);
+	void setData(float time, int score, int sticksPicked);
 	//void handleWindow(sf::RenderWindow& window, bool& musicOn);
 
 private:

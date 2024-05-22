@@ -40,7 +40,7 @@ void Board::loadAndRunFromExisting(Controller& controller)
 {
 	bool firstLine = true;
 	float time = 0;  //default value
-	int score = 0;  //default value
+	int score = 0, sticksPicked = 0;      //defalut
 
 	auto file = std::ifstream("level.txt");
 	try
@@ -56,9 +56,10 @@ void Board::loadAndRunFromExisting(Controller& controller)
 			{
 				std::istringstream iss(line);
 
+
 				if (firstLine)
 				{
-					if (!(iss >> time >> score))
+					if (!(iss >> time >> score >> sticksPicked))
 					{
 						//throw  wrong input
 					}
@@ -83,7 +84,7 @@ void Board::loadAndRunFromExisting(Controller& controller)
 			}
 		}
 		updateRemoveable();
-		updateControllerData(controller, time, score);
+		updateControllerData(controller, time, score, sticksPicked);
 	}
 	catch (std::exception& e)
 	{
@@ -112,7 +113,7 @@ void Board::generateGame(Controller& controller)
 
 	float time = m_sticks.size() >= 25 ? LONG_LEVEL : SHORT_LEVEL;
 
-	updateControllerData(controller, time, 0);
+	updateControllerData(controller, time, 0, 0);
 }
 //-------------------------------------------------------------------------------------
 void Board::createRandomStick()
@@ -156,9 +157,9 @@ float Board::randomFloat(float min, float max)const
 //-------------------------------------------------------------------------------------
 //This function is responsible of updating the data according to what was saved in the
 //existing file
-void Board::updateControllerData(Controller& controller, float time, int score) const
+void Board::updateControllerData(Controller& controller, float time, int score, int sticksPicked) const
 {
-	controller.setData(time, score);
+	controller.setData(time, score, sticksPicked);
 }
 //------------------------------------------------------------------------------------
 int Board::getRemovableSticks()const
@@ -245,7 +246,7 @@ void Board::printBoard(sf::RenderWindow& window)
 	}
 }
 //-------------------------------------------------------------------------------------
-void Board::handlePressedSave(int score,float levelTime) const
+void Board::handlePressedSave(int score,float levelTime, int sticksPicked) const
 {
 	std::ofstream boardFile;
 	if (std::filesystem::exists("level.txt"))
@@ -258,17 +259,17 @@ void Board::handlePressedSave(int score,float levelTime) const
 	// try and catch
 	if (boardFile.is_open())
 	{
-		saveBoardAndCopyToText(boardFile, score, levelTime);
+		saveBoardAndCopyToText(boardFile, score, levelTime, sticksPicked);
 		//levelExists = true;
 	}
 }
 
 //---------------------------------------------------------------------------------------
-void Board::saveBoardAndCopyToText(std::ofstream& boardFile, int score, float levelTime)const
+void Board::saveBoardAndCopyToText(std::ofstream& boardFile, int score, float levelTime, int sticksPicked)const
 {
 	std::string info;
 
-	info = std::to_string(levelTime) + " " + std::to_string(score)+ "\n";
+	info = std::to_string(levelTime) + " " + std::to_string(score) + " " + std::to_string(sticksPicked)+ "\n";
 	boardFile << info;
 
 	for (auto it = m_sticks.begin(); it != m_sticks.end(); it++)

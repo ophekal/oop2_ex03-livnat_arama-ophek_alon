@@ -39,12 +39,13 @@ void Controller::run(sf::RenderWindow& window, bool& load, bool& musicOn)
 //------------------------------------------------------------------------------
 //This function is responsible of setting the score and time of the game 
 //according to what has been read from the file
-void Controller::setData(float time, int score)
+void Controller::setData(float time, int score, int sticksPicked)
 {
 	m_totalScore = score;
 	m_levelTime = time;
 	m_removableSticks = m_board.getRemovableSticks();
 	m_sticksLeft = m_board.getNumOfSticks();
+	m_sticksPicked = sticksPicked;
 }
 
 //------------------------------------------------------------------------------
@@ -198,7 +199,7 @@ void Controller::handleClickInfoBar(const sf::Vector2f& location, bool& musicOn)
 	}
 	if (pressedSave)
 	{
-		m_board.handlePressedSave(m_totalScore, m_clock.getTimer());
+		m_board.handlePressedSave(m_totalScore, m_clock.getTimer(), m_sticksPicked);
 	}
 	else if (pressedHint)
 	{
