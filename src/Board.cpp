@@ -1,15 +1,17 @@
 
-#include "Board.h"
+#include <filesystem>
 #include <fstream>
+#include <SFML/Graphics.hpp>
 #include <sstream>
 #include <string>
+#include <exception>
 #include <stdexcept>
 #include <random>
 #include "Macros.h"
-#include <filesystem>
-#include "Stick.h"
-#include <SFML/Graphics.hpp>
 #include <vector>
+#include "InvalidFileException.h"
+#include "Board.h"
+#include "Stick.h"
 #include "Controller.h"
 
 //-------------------------------------------------------------------------------------
@@ -47,7 +49,7 @@ void Board::loadAndRunFromExisting(Controller& controller)
 	{
 		if (!file.is_open())
 		{
-			//throw 
+			//throw InvalidFileException(file);
 		}
 
 		for (auto line = std::string(); std::getline(file, line); )
@@ -125,8 +127,8 @@ void Board::createRandomStick()
 	while (1)
 	{
 		// Generate random values within the board area
-		x = randomFloat(BOARD_START_X, BOARD_START_X + BOARD_WID),
-		y = randomFloat(BOARD_START_Y, BOARD_START_Y + BOARD_HIG),
+		x = randomFloat(BOARD_START_X+15, BOARD_START_X + BOARD_WID),
+		y = randomFloat(BOARD_START_Y,BOARD_HIG),
 		len = randomFloat(15, BOARD_WID / 10.0f),
 		angle = randomFloat(1, 179);
 
@@ -135,8 +137,8 @@ void Board::createRandomStick()
 
 		Stick stick(HandleResources::instance().getObjectTexture(StickType(colour)), Colour(colour), angle, {x,y}, len);
 		sf::Vector2f endPoint = stick.getEndPoint();
-		if (endPoint.y >= 0 && endPoint.y <= 950 &&
-			endPoint.x >= 450 && endPoint.x <= 1500)
+		if (endPoint.y >= BOARD_START_Y+10 && endPoint.y <= BOARD_HIG-10 &&
+			endPoint.x >= BOARD_START_X + 15 && endPoint.x <= WINDOW_WIDTH-10)
 		{
 			addStickToList(stick);
 			return;
