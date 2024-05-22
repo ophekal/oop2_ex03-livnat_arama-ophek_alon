@@ -208,13 +208,13 @@ void Board::updateRemoveable()
 void Board::updateDataAndDeleteStick( std::list<Stick>::iterator& needToRemoveIt)
 {
 	// change the sticks that this stick blocked
-	needToRemoveIt->handleStickRemove();
+	needToRemoveIt->handleStickRemove(m_removeable);
 
 	// update the multimap - delete the pointer to the stick 
 	deleteStick(needToRemoveIt);
 
 	// update the multimap
-	updateRemoveable();
+	//updateRemoveable();
 
 }
 //-----------------------------------------------------------------------------

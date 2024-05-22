@@ -8,7 +8,6 @@ Stick::Stick(const sf::Texture* picture, Colour colour, float angle, const sf::V
 	  :m_colour(colour), m_angle(angle), m_startingPoint(start), m_length(len)
 {
     m_length *= 30.0f;
-   // float pixelLength = m_length*30.f;
     float pixelWidth = 30.0f;
 
     m_stick.setTexture(picture);
@@ -28,23 +27,23 @@ void Stick::draw(sf::RenderWindow& window)
     window.draw(m_stick);
 
 }
-//---------------------------------------------------------------------------------
-int Stick::getBlockThisStick() const
-{
-	return m_blockThisStick;
-}
-
-//---------------------------------------------------------------------------------
-void Stick::setBlockThisStick(int factor)
-{
-    m_blockThisStick += factor;
-}
+////---------------------------------------------------------------------------------
+//int Stick::getBlockThisStick() const
+//{
+//	return m_blockThisStick;
+//}
+//
+////---------------------------------------------------------------------------------
+//void Stick::setBlockThisStick(int factor)
+//{
+//    m_blockThisStick += factor;
+//}
 //---------------------------------------------------------------------------------
 void Stick::updateSticksBlocking(Stick* stick)
 {
     m_sticksBlocking.push_back(stick);
     stick->updateSticksBlocked(this);
-    m_blockThisStick++;
+   // m_blockThisStick++;
 }
 //---------------------------------------------------------------------------------
 sf::Vector2f Stick::getStartingPoint() const
@@ -147,13 +146,17 @@ bool Stick::onSegment(sf::Vector2f p, sf::Vector2f q, sf::Vector2f r)
 
 
 //--------------------------------------------------------------------------------
-void Stick::handleStickRemove()
+void Stick::handleStickRemove(std::multimap<int, Stick*>& removable)
 {
     //go over the m_sticksBlocked and change 
-    for (auto i = 0; i < m_sticksBlocked.size(); i++)
+    for (auto it = m_sticksBlocked.begin() ; it != m_sticksBlocked.end(); it++)
     {
-        m_sticksBlocked[i]->setBlockThisStick(-1);
-        m_sticksBlocked[i]->eraseFromBlocking(this);
+       // m_sticksBlocked[i]->setBlockThisStick(-1);
+        *it->eraseFromBlocking(this);
+        if (*it->getNumOfBlockingMe() == 0)
+        {
+            m_removeable.insert(std::make_pair(it->getStickScore(), &(*it)));
+        }
     }
 }
 
@@ -163,20 +166,20 @@ void Stick::eraseFromBlocking(Stick* stickToDelete)
     auto it = std::find(m_sticksBlocking.begin(), m_sticksBlocking.end(), stickToDelete);
     if (it != m_sticksBlocking.end()) 
     {
-        m_sticksBlocking.erase(it);  // Remove the pointer from the vector
+        m_sticksBlocking.erase(it);  // Remove the pointer from the list
     }
 }
 
-//--------------------------------------------------------------------------------
-bool Stick::getInRemoveable()const
-{
-    return m_inRemoveable;
-}
-//--------------------------------------------------------------------------------
-void Stick::setInRemoveable(bool boolValue)
-{
-    m_inRemoveable = boolValue;
-}
+////--------------------------------------------------------------------------------
+//bool Stick::getInRemoveable()const
+//{
+//    return m_inRemoveable;
+//}
+////--------------------------------------------------------------------------------
+//void Stick::setInRemoveable(bool boolValue)
+//{
+//    m_inRemoveable = boolValue;
+//}
 //--------------------------------------------------------------------------------
 std::string Stick::getStickInfo()const
 {
@@ -199,4 +202,9 @@ bool Stick::pressed(const sf::Vector2f& location)
 {
     const auto transformedPoint = m_stick.getTransform().getInverse().transformPoint(location);
     return m_stick.getLocalBounds().contains(transformedPoint);
+}
+//----------------------------------------------------------------------------------
+int Stick::getNumOfBlockingMe()const
+{
+    return m_sticksBlocking.size();
 }
