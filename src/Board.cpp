@@ -192,7 +192,7 @@ void Board::updateRemoveable()
 	//go over the list and check for the removeable sticks
 	for (auto it = m_sticks.begin(); it != m_sticks.end(); it++)
 	{
-		if ( it->getNumOfBlockingMe() == 0 )
+		if ( it-> isFree())
 		{
 			m_removeable.insert(std::make_pair(it->getStickScore(),&(*it)));
 		}
@@ -304,7 +304,7 @@ void Board::checkIfPressedOnStick(sf::RenderWindow& window, Controller& controll
 	//go over the sticks list and check if we pressed one of them
 	for (auto it = m_sticks.rbegin(); it != m_sticks.rend(); it++)
 	{
-		if (it->pressed(location) && it->getNumOfBlockingMe() == 0)
+		if (it->pressed(location) && it->isFree() )
 		{
 			HandleResources::instance().playSound(G_FREE);
 			score += it->getStickScore();
@@ -312,7 +312,7 @@ void Board::checkIfPressedOnStick(sf::RenderWindow& window, Controller& controll
 			picked++;
 			return;
 		}
-		else if (it->pressed(location) && it->getNumOfBlockingMe() != 0)
+		else if (it->pressed(location) && !it->isFree() /*it->getNumOfBlockingMe() != 0*/)
 		{
 			HandleResources::instance().playSound(G_BLOCKED);
 			highlightBlockingSticks(window, controller, *it);

@@ -27,7 +27,8 @@ public:
     void updateSticksBlocking(Stick* stick);
     bool pressed(const sf::Vector2f& location);
     void eraseFromBlocking(Stick* stickToDelete);
-    int getNumOfBlockingMe()const;
+   // int getNumOfBlockingMe()const;
+    bool isFree()const;
     void highlightBlockingSticks();
     void stopHighlightBlockingSticks();
     void highlightStick();
@@ -42,8 +43,5 @@ private:
     sf::Vector2f m_startingPoint;
     float m_length;
     std::list<Stick*> m_sticksBlocked;   //holds the sticks that this stick blocks
-    std::list<Stick*> m_sticksBlocking;   //holds he sticks that block this stick
-   // int m_blockThisStick = 0;              //holds the number of sticks that block this stick
-   // bool m_inRemoveable = false;             //holds if the stick is allready in removable
- 
+    std::list<Stick*> m_sticksBlocking;   //holds he sticks that block this stick 
 };

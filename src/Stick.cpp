@@ -154,7 +154,7 @@ void Stick::handleStickRemove(std::multimap<int, Stick*>& removable)
     {
        // m_sticksBlocked[i]->setBlockThisStick(-1);
         (*it)->eraseFromBlocking(this);
-        if ((*it)->getNumOfBlockingMe() == 0)
+        if ((*it)->isFree())
         {
             removable.insert(std::make_pair((*it)->getStickScore(),(*it)));
         }
@@ -201,9 +201,9 @@ bool Stick::pressed(const sf::Vector2f& location)
     return m_stick.getLocalBounds().contains(transformedPoint);
 }
 //----------------------------------------------------------------------------------
-int Stick::getNumOfBlockingMe()const
+bool Stick::isFree()const
 {
-    return m_sticksBlocking.size();
+    return m_sticksBlocking.empty();
 }
 //----------------------------------------------------------------------------------
 void Stick::highlightBlockingSticks()
