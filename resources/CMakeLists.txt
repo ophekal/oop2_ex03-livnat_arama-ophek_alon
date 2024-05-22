@@ -31,5 +31,7 @@ configure_file ("scoreFeedback.jpg" ${CMAKE_BINARY_DIR} COPYONLY)
 
 
 configure_file ("gameMusic.wav" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("blockedStick.wav" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("pickedUp.wav" ${CMAKE_BINARY_DIR} COPYONLY)
 
 configure_file ("font.ttf" ${CMAKE_BINARY_DIR} COPYONLY)

@@ -306,6 +306,7 @@ void Board::checkIfPressedOnStick(sf::RenderWindow& window, Controller& controll
 	{
 		if (it->pressed(location) && it->getNumOfBlockingMe() == 0)
 		{
+			HandleResources::instance().playSound(G_FREE);
 			score += it->getStickScore();
 			updateDataAndDeleteStick(it);
 			picked++;
@@ -313,6 +314,7 @@ void Board::checkIfPressedOnStick(sf::RenderWindow& window, Controller& controll
 		}
 		else if (it->pressed(location) && it->getNumOfBlockingMe() != 0)
 		{
+			HandleResources::instance().playSound(G_BLOCKED);
 			highlightBlockingSticks(window, controller, *it);
 			return;
 		}

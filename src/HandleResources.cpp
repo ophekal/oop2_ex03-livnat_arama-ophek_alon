@@ -13,9 +13,8 @@ HandleResources::HandleResources()
 	updateObjectVector();
 	updateBackgroundVector();
 	updateInfoBarVector();
-	//updateScreenVector();
-	//updateBufferSounds();
-	//updateGameSounds();
+	updateBufferSounds();
+	updateGameSounds();
 	m_font.loadFromFile("font.ttf");
 	m_gameMusic.openFromFile("gameMusic.wav");
 }
@@ -59,14 +58,7 @@ void HandleResources::updateBackgroundVector()
 void HandleResources::updateInfoBarVector()
 {
 	m_infoBarTextures.resize(8);
-	//m_infoBarTextures[B_INFO].loadFromFile("information.png");
-	//m_infoBarTextures[B_LEVEL].loadFromFile("level.png");
-	//m_infoBarTextures[B_LIVES].loadFromFile("lives.png");
-	//m_infoBarTextures[B_KEYS].loadFromFile("keys.png");
 	m_infoBarTextures[B_TIME].loadFromFile("time.png");
-
-	//m_infoBarTextures[B_SCORE].loadFromFile("score.png");
-	//m_infoBarTextures[B_RESTART].loadFromFile("restart.png");
 	m_infoBarTextures[B_SAVE].loadFromFile("saveButton.png");
 	m_infoBarTextures[B_HOME].loadFromFile("home.png");
 	m_infoBarTextures[B_FREE].loadFromFile("freeSticks.png");
@@ -77,39 +69,20 @@ void HandleResources::updateInfoBarVector()
 }
 
 //-------------------------------------------------------------------------
-//void HandleResources::updateScreenVector()
-//{
-//	m_screenTextures.resize(5);
-//	m_screenTextures[S_WIN].loadFromFile("youWin.png");
-//	m_screenTextures[S_GAMEOVER].loadFromFile("gameOver.png");
-//	m_screenTextures[S_TRYAGAIN].loadFromFile("tryAgain.png");
-//	m_screenTextures[S_GOODJOB].loadFromFile("goodJob.png");
-//	m_screenTextures[S_FINALSCORE].loadFromFile("finalScore.png");
-//}
+void HandleResources::updateBufferSounds()
+{
+	m_bufferSounds.resize(2);
+	m_bufferSounds[G_FREE].loadFromFile("pickedUp.wav");
+	m_bufferSounds[G_BLOCKED].loadFromFile("blockedStick.wav");
+}
 
-////-------------------------------------------------------------------------
-//void HandleResources::updateBufferSounds()
-//{
-//	m_bufferSounds.resize(6);
-//	m_bufferSounds[G_CHEESE].loadFromFile("yummy.wav");
-//	m_bufferSounds[G_GIFT].loadFromFile("gift.wav");
-//	m_bufferSounds[G_MOUSE].loadFromFile("mouseEaten.wav");
-//	m_bufferSounds[G_WIN].loadFromFile("goodJobYouWin.wav");
-//	m_bufferSounds[G_LOST].loadFromFile("tryAgainGameOver.wav");
-//	m_bufferSounds[G_KEY].loadFromFile("keys.wav");
-//}
-
-////-------------------------------------------------------------------------
-//void HandleResources::updateGameSounds()
-//{
-//	m_gameSound.resize(6);
-//	m_gameSound[G_CHEESE].setBuffer(m_bufferSounds[G_CHEESE]);
-//	m_gameSound[G_GIFT].setBuffer(m_bufferSounds[G_GIFT]);
-//	m_gameSound[G_MOUSE].setBuffer(m_bufferSounds[G_MOUSE]);
-//	m_gameSound[G_WIN].setBuffer(m_bufferSounds[G_WIN]);
-//	m_gameSound[G_LOST].setBuffer(m_bufferSounds[G_LOST]);
-//	m_gameSound[G_KEY].setBuffer(m_bufferSounds[G_KEY]);
-//}
+//-------------------------------------------------------------------------
+void HandleResources::updateGameSounds()
+{
+	m_gameSound.resize(2);
+	m_gameSound[G_FREE].setBuffer(m_bufferSounds[G_FREE]);
+	m_gameSound[G_BLOCKED].setBuffer(m_bufferSounds[G_BLOCKED]);
+}
 
 //--------------------------------------------------------------------------
 const sf::Texture* HandleResources::getInfoBarTexture(Bar icon)
@@ -117,11 +90,6 @@ const sf::Texture* HandleResources::getInfoBarTexture(Bar icon)
 	return &(m_infoBarTextures[icon]);
 }
 
-////--------------------------------------------------------------------------
-//const sf::Texture* HandleResources::getScreenTexture(Screen icon)
-//{
-//	return &(m_screenTextures[icon]);
-//}
 
 //-------------------------------------------------------------------------
 const sf::Texture* HandleResources::getObjectTexture(StickType icon)
@@ -141,12 +109,12 @@ const sf::Font* HandleResources::getFont()
 	return &m_font;
 }
 
-////-------------------------------------------------------------------------
-//void HandleResources::playSound(GameSound sound)
-//{
-//	m_gameSound[sound].setVolume(50);
-//	m_gameSound[sound].play();
-//}
+//-------------------------------------------------------------------------
+void HandleResources::playSound(GameSound sound)
+{
+	m_gameSound[sound].setVolume(100);
+	m_gameSound[sound].play();
+}
 
 //-------------------------------------------------------------------------
 void HandleResources::playMusic()

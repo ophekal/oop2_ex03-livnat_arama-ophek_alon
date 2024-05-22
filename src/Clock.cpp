@@ -6,6 +6,7 @@
 #include <string>
 
 //------------------------------------------------------------------------
+//This function sets the clock data
 
 void Clock::setClock(float levelTime, bool& levelOver)
 {
@@ -35,6 +36,8 @@ float Clock::getTimer()const
 	return m_timer;
 }
 //-----------------------------------------------------------------------
+//This function is responsible of updating the level's time
+
 void Clock::updateTime(bool& levelOver)
 {
 	m_timer -= m_clock.getElapsedTime().asSeconds();

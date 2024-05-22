@@ -15,7 +15,7 @@ InfoBar::InfoBar()
 	m_text.setString("Information");
 	m_text.setCharacterSize(50);
 	m_text.setFillColor(sf::Color::Black);
-	m_text.setPosition(75, 50);
+	m_text.setPosition(INFO_X-5, INFO_Y);
 
 	m_infoBar.resize(8);
 	m_infoBar[0].updateInfoItem(*HandleResources::instance().getInfoBarTexture(B_SCORE), INFO_X, SCORE_Y, INFO_SIZE);

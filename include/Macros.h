@@ -129,6 +129,4 @@ enum GameSound
 {
 	G_FREE,
 	G_BLOCKED,
-	G_WIN,
-	G_LOST
 };
