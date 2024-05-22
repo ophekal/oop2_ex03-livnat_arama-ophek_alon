@@ -1,6 +1,7 @@
 #include "Stick.h"
 #include <cmath>
 #include <numbers>
+#include <map>
 
 
 //---------------------------------------------------------------------------------
@@ -152,10 +153,10 @@ void Stick::handleStickRemove(std::multimap<int, Stick*>& removable)
     for (auto it = m_sticksBlocked.begin() ; it != m_sticksBlocked.end(); it++)
     {
        // m_sticksBlocked[i]->setBlockThisStick(-1);
-        *it->eraseFromBlocking(this);
-        if (*it->getNumOfBlockingMe() == 0)
+        (*it)->eraseFromBlocking(this);
+        if ((*it)->getNumOfBlockingMe() == 0)
         {
-            m_removeable.insert(std::make_pair(it->getStickScore(), &(*it)));
+            removable.insert(std::make_pair((*it)->getStickScore(),(*it)));
         }
     }
 }

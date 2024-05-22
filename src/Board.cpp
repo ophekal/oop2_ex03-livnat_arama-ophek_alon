@@ -195,7 +195,7 @@ void Board::updateRemoveable()
 	//go over the list and check for the removeable sticks
 	for (auto it = m_sticks.begin(); it != m_sticks.end(); it++)
 	{
-		if (it->getBlockThisStick() == 0 && !(it->getInRemoveable()))
+		if ( it->getNumOfBlockingMe() == 0 )
 		{
 			m_removeable.insert(std::make_pair(it->getStickScore(),&(*it)));
 			it->setInRemoveable(true);

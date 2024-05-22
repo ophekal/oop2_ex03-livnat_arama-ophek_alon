@@ -10,8 +10,8 @@ public:
     Stick(const sf::Texture* picture, Colour colour, float angle, const sf::Vector2f& start, float len);
     ~Stick()= default;
     void draw(sf::RenderWindow& window);
-    int getBlockThisStick() const;
-    void setBlockThisStick(int factor);
+    //int getBlockThisStick() const;
+    //void setBlockThisStick(int factor);
     sf::Vector2f getStartingPoint() const;
     bool onSegment(sf::Vector2f p, sf::Vector2f q, sf::Vector2f r);
     int orientation(sf::Vector2f p, sf::Vector2f q, sf::Vector2f r);
