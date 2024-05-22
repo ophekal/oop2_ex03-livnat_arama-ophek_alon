@@ -18,10 +18,6 @@ Board::Board()
 {
 	m_board.setPosition({ BOARD_START_X ,BOARD_START_Y });
 	m_board.setTexture(HandleResources::instance().getBackgroundTexture(B_BOARD));
-
-	// why it is not working???
-	//m_board.setOutlineThickness(5.f);
-	//m_board.setOutlineColor(sf::Color::Black);
 }
 
 //-------------------------------------------------------------------------------------
@@ -198,7 +194,6 @@ void Board::updateRemoveable()
 		if ( it->getNumOfBlockingMe() == 0 )
 		{
 			m_removeable.insert(std::make_pair(it->getStickScore(),&(*it)));
-			it->setInRemoveable(true);
 		}
 	}
 }
@@ -241,9 +236,6 @@ void Board::deleteStick(std::list<Stick>::iterator needToRemoveIt)
 //-------------------------------------------------------------------------------------
 void Board::printBoard(sf::RenderWindow& window)
 {
-	// why it is not working???
-	m_board.setOutlineThickness(5.f);
-	m_board.setOutlineColor(sf::Color::Black);
 	window.draw(m_board);
 
 	//go over the sticks list and draw the sticks
@@ -303,14 +295,14 @@ void Board::checkIfPressedOnStick(const sf::Vector2f& location, int& score, int&
 	//go over the sticks list and check if we pressed one of them
 	for (auto it = m_sticks.begin(); it != m_sticks.end(); it++)
 	{
-		if (it->pressed(location) && it->getInRemoveable())
+		if (it->pressed(location) && it->getNumOfBlockingMe() == 0)
 		{
 			score += it->getStickScore();
 			updateDataAndDeleteStick(it);
 			picked++;
 			return;
 		}
-		else if (it->pressed(location) && !it->getInRemoveable())
+		else if (it->pressed(location) && it->getNumOfBlockingMe() != 0)
 		{
 			//highlightBlockingSticks();
 		}
