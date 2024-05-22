@@ -164,10 +164,13 @@ void Stick::handleStickRemove(std::multimap<int, Stick*>& removable)
 //--------------------------------------------------------------------------------
 void Stick::eraseFromBlocking(Stick* stickToDelete)
 {
-    auto it = std::find(m_sticksBlocking.begin(), m_sticksBlocking.end(), stickToDelete);
-    if (it != m_sticksBlocking.end()) 
+    for (auto it = m_sticksBlocking.begin(); it != m_sticksBlocking.end(); it++)
     {
-        m_sticksBlocking.erase(it);  // Remove the pointer from the list
+        if ((*it) == stickToDelete)
+        {
+            m_sticksBlocking.erase(it);  // Remove the pointer from the list
+            break;
+        }
     }
 }
 

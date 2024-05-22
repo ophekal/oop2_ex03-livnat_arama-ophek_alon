@@ -27,6 +27,7 @@ configure_file ("freeSticks.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("pickedUp.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("sticksLeft.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("score.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("scoreFeedback.jpg" ${CMAKE_BINARY_DIR} COPYONLY)
 
 
 configure_file ("gameMusic.wav" ${CMAKE_BINARY_DIR} COPYONLY)
