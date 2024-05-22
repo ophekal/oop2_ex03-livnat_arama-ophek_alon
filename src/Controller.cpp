@@ -65,9 +65,6 @@ void Controller::startGame(sf::RenderWindow& window,bool load, bool& musicOn)
 			return;
 		}
 		windowPollEvent(window, musicOn);
-
-		//const auto deltaTime = clock.restart();
-
 		updateInfoBar(musicOn);
 	}
 
@@ -99,8 +96,8 @@ void Controller::windowPollEvent(sf::RenderWindow& window, bool& musicOn)
 void Controller::print(sf::RenderWindow& window)
 {
 	window.clear();
-	m_board.printBoard(window);
 	m_infoBar.printInfoBar(window);
+	m_board.printBoard(window);
 	m_clock.printClock(window, m_levelOver);
 	window.display();
 }
