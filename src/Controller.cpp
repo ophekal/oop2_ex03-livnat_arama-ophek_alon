@@ -166,27 +166,27 @@ void Controller::print(sf::RenderWindow& window)
 //
 //----------------------------------------------------------------------------------------
 void Controller::handleClick(const sf::Event::MouseButtonEvent& event,
-	sf::RenderWindow& window, bool& musicOn)
+	                         sf::RenderWindow& window, bool& musicOn)
 {
 	auto location = window.mapPixelToCoords({ event.x,event.y });
 
-	handleClickInfoBar(location, musicOn);
-	handleClickBoard(location);
+	handleClickInfoBar(window,location, musicOn);
+	handleClickBoard(window,location);
 }
 //---------------------------------------------------------------------------------------
-void Controller::handleClickBoard(const sf::Vector2f& location)
+void Controller::handleClickBoard(sf::RenderWindow& window,const sf::Vector2f& location)
 {
 	//checking if we're inside the board
 	if (location.y >= 0 && location.y <= 950 &&	                  
 		location.x >= 450 && location.x <= 1500)						
 	{
-		m_board.checkIfPressedOnStick(location, m_totalScore, m_sticksPicked);
+		m_board.checkIfPressedOnStick(window, *this,location, m_totalScore, m_sticksPicked);
 
 		//sticks left and removeable sticks updated here
 	}
 }
 //---------------------------------------------------------------------------------------
-void Controller::handleClickInfoBar(const sf::Vector2f& location, bool& musicOn)
+void Controller::handleClickInfoBar(sf::RenderWindow& window,const sf::Vector2f& location, bool& musicOn)
 {
 	bool pressedSave = false;
 	bool pressedHint = false;
@@ -203,7 +203,7 @@ void Controller::handleClickInfoBar(const sf::Vector2f& location, bool& musicOn)
 	}
 	else if (pressedHint)
 	{
-		m_board.handlePressedHint();
+		m_board.handlePressedHint(window,*this);
 	}
 	
 }
@@ -243,5 +243,5 @@ void Controller::printFinalScore(sf::RenderWindow& window)
 	window.draw(scorePic);
 	window.draw(printText);
 	window.display();
-	sf::sleep(sf::seconds(2));
+	sf::sleep(sf::seconds(1.5));
 }

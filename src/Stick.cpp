@@ -165,14 +165,6 @@ void Stick::handleStickRemove(std::multimap<int, Stick*>& removable)
 void Stick::eraseFromBlocking(Stick* stickToDelete)
 {
     m_sticksBlocking.remove(stickToDelete);
-    //for (auto it = m_sticksBlocking.begin(); it != m_sticksBlocking.end(); it++)
-    //{
-    //    if ((*it) == stickToDelete)
-    //    {
-    //        m_sticksBlocking.erase(it);  // Remove the pointer from the list
-    //        break;
-    //    }
-    //}
 }
 
 ////--------------------------------------------------------------------------------
@@ -212,4 +204,31 @@ bool Stick::pressed(const sf::Vector2f& location)
 int Stick::getNumOfBlockingMe()const
 {
     return m_sticksBlocking.size();
+}
+//----------------------------------------------------------------------------------
+void Stick::highlightBlockingSticks()
+{
+    for (auto it = m_sticksBlocking.begin(); it != m_sticksBlocking.end(); it++)
+    {
+        (*it)->highlightStick();
+    }
+}
+//---------------------------------------------------------------------------------
+void Stick::stopHighlightBlockingSticks()
+{
+    for (auto it = m_sticksBlocking.begin(); it != m_sticksBlocking.end(); it++)
+    {
+        (*it)->stopHighlightStick();
+    }
+}
+//----------------------------------------------------------------------------------
+void Stick::highlightStick()
+{
+    m_stick.setOutlineThickness(4.f);
+    m_stick.setOutlineColor(sf::Color::Magenta);
+}
+//----------------------------------------------------------------------------------
+void Stick::stopHighlightStick()
+{
+    m_stick.setOutlineThickness(0);
 }

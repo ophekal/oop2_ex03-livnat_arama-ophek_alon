@@ -201,7 +201,7 @@ void Board::updateRemoveable()
 
 //-----------------------------------------------------------------------------
 //after the function delete the stick from the list
-void Board::updateDataAndDeleteStick( std::list<Stick>::iterator& needToRemoveIt)
+void Board::updateDataAndDeleteStick( std::list<Stick>::reverse_iterator& needToRemoveIt)
 {
 	// change the sticks that this stick blocked
 	needToRemoveIt->handleStickRemove(m_removeable);
@@ -216,12 +216,12 @@ void Board::updateDataAndDeleteStick( std::list<Stick>::iterator& needToRemoveIt
 //-----------------------------------------------------------------------------
 // remove the object you want to delete
 
-void Board::deleteStick(std::list<Stick>::iterator needToRemoveIt)
+void Board::deleteStick(std::list<Stick>::reverse_iterator& needToRemoveIt)
 {
 	Stick* objectToDelete = &(*needToRemoveIt);
 
-	// remove the element from the list using erase
-	m_sticks.erase(needToRemoveIt);
+	// remove the element from the list using erase after coverting to iterator
+	m_sticks.erase(std::next(needToRemoveIt).base());
 
 	// remove all pointers to the object from the multimap
 	for (auto it = m_removeable.begin(); it != m_removeable.end(); ++it) 
@@ -285,16 +285,24 @@ int Board::getNumOfSticks()const
 	return m_sticks.size();
 }
 //-----------------------------------------------------------------------------
-void Board::handlePressedHint()
+void Board::handlePressedHint(sf::RenderWindow& window, Controller& controller)
 {
-
+	for (auto it = m_removeable.rbegin(); it != m_removeable.rend(); it++)
+	{
+		it ->second ->highlightStick();
+		controller.print(window);
+		sf::sleep(sf::seconds(1));
+		it->second->stopHighlightStick();
+		controller.print(window);
+		sf::sleep(sf::seconds(0.5));
+	}
 }
 
 //-----------------------------------------------------------------------------
-void Board::checkIfPressedOnStick(const sf::Vector2f& location, int& score, int& picked)
+void Board::checkIfPressedOnStick(sf::RenderWindow& window, Controller& controller, const sf::Vector2f& location, int& score, int& picked)
 {
 	//go over the sticks list and check if we pressed one of them
-	for (auto it = m_sticks.begin(); it != m_sticks.end(); it++)
+	for (auto it = m_sticks.rbegin(); it != m_sticks.rend(); it++)
 	{
 		if (it->pressed(location) && it->getNumOfBlockingMe() == 0)
 		{
@@ -305,8 +313,18 @@ void Board::checkIfPressedOnStick(const sf::Vector2f& location, int& score, int&
 		}
 		else if (it->pressed(location) && it->getNumOfBlockingMe() != 0)
 		{
-			//highlightBlockingSticks();
+			highlightBlockingSticks(window, controller, *it);
+			return;
 		}
 	}
+}
+//-------------------------------------------------------------------------------
+
+void Board::highlightBlockingSticks(sf::RenderWindow& window,Controller& controller, Stick& stick)
+{
+	stick.highlightBlockingSticks();
+	controller.print(window);
+	sf::sleep(sf::seconds(1.5));
+	stick.stopHighlightBlockingSticks();
 }
 

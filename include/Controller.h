@@ -13,6 +13,7 @@ public:
 	Controller() = default;
 	void run(sf::RenderWindow& window, bool& load, bool& musicOn);
 	void setData(float time, int score, int sticksPicked);
+	void print(sf::RenderWindow& window);
 	//void handleWindow(sf::RenderWindow& window, bool& musicOn);
 
 private:
@@ -31,7 +32,6 @@ private:
 
 	void startGame(sf::RenderWindow& window, bool load, bool& musicOn);
 	void windowPollEvent(sf::RenderWindow& window, bool& musicOn);
-	void print(sf::RenderWindow& window);
 	/*void printFeedback(const sf::Texture& feedback, sf::RenderWindow& window,
 		const sf::Sprite& background, GameSound sound)const;
 	bool checkGameStatus(int numOfCheese, int numOfCats, sf::RenderWindow& window,
@@ -44,8 +44,8 @@ private:
 	void handleLevelOver(sf::RenderWindow& window, const sf::Sprite& background, bool& musicOn);
 	void handleExit(sf::RenderWindow& window, const sf::Sprite& background);*/
 	void handleClick(const sf::Event::MouseButtonEvent& event, sf::RenderWindow& window, bool& musicOn);
-	void handleClickBoard(const sf::Vector2f& location);
-	void handleClickInfoBar(const sf::Vector2f& location, bool& musicOn);
+	void handleClickBoard(sf::RenderWindow& window, const sf::Vector2f& location);
+	void handleClickInfoBar(sf::RenderWindow& window, const sf::Vector2f& location, bool& musicOn);
 	void updateInfoBar(bool& musicOn);
 	void printFinalScore(sf::RenderWindow& window);
 };

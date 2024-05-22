@@ -28,6 +28,10 @@ public:
     bool pressed(const sf::Vector2f& location);
     void eraseFromBlocking(Stick* stickToDelete);
     int getNumOfBlockingMe()const;
+    void highlightBlockingSticks();
+    void stopHighlightBlockingSticks();
+    void highlightStick();
+    void stopHighlightStick();
 
   
 

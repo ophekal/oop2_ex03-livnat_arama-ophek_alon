@@ -25,14 +25,15 @@ public:
 	void updateControllerData(Controller& controller, float time, int score, int sticksPicked) const;
 	void addStickToList(Stick& stick/*StickType colour, float angle, float len, float x, float y*/);
 	void handlePressedSave(int scorefloat, float levelTime, int sticksPicked) const;
-	void handlePressedHint();
+	void handlePressedHint(sf::RenderWindow& window, Controller& controller);
 	void saveBoardAndCopyToText(std::ofstream& boardFile, int score, float levelTime, int sticksPicked)const;
-	void updateDataAndDeleteStick(std::list<Stick>::iterator& needToRemoveIt);
+	void updateDataAndDeleteStick(std::list<Stick>::reverse_iterator& needToRemoveIt);
 	void updateRemoveable();
 	int getRemovableSticks()const;
 	int getNumOfSticks()const;
-	void checkIfPressedOnStick(const sf::Vector2f& location, int& score, int& picked);
-	void deleteStick(std::list<Stick>::iterator needToRemoveIt);
+	void checkIfPressedOnStick(sf::RenderWindow& window, Controller& controller, const sf::Vector2f& location, int& score, int& picked);
+	void deleteStick(std::list<Stick>::reverse_iterator& needToRemoveIt);
+	void highlightBlockingSticks(sf::RenderWindow& window, Controller& controller, Stick& stick);
 
 private:
 
