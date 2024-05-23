@@ -113,6 +113,7 @@ void Controller::handleClickBoard(sf::RenderWindow& window,const sf::Vector2f& l
 		m_board.checkIfPressedOnStick(window, *this,location);
 	}
 }
+
 //---------------------------------------------------------------------------------------
 void Controller::handleClickInfoBar(sf::RenderWindow& window,const sf::Vector2f& location, bool& musicOn)
 {
@@ -120,8 +121,8 @@ void Controller::handleClickInfoBar(sf::RenderWindow& window,const sf::Vector2f&
 	bool pressedHint = false;
 
 	//checking if we're in the infobar
-	if (location.y >= 0 && location.y <= 950  &&	
-		location.x >= 0 && location.x <= 450)						
+	if (location.y >= INFO_START_Y && location.y <= INFO_HIG &&
+		location.x >= INFO_START_X && location.x <= INFO_WID)
 	{
 		m_infoBar.handleClick(location, m_levelOver, pressedSave,pressedHint, musicOn);
 	}
@@ -135,6 +136,7 @@ void Controller::handleClickInfoBar(sf::RenderWindow& window,const sf::Vector2f&
 	}
 	
 }
+
 //----------------------------------------------------------------------------------------
 void Controller::updateInfoBar(bool& musicOn)
 {
@@ -170,21 +172,25 @@ void Controller::printFinalScore(sf::RenderWindow& window)
 	window.display();
 	sf::sleep(sf::seconds(1.5));
 }
+
 //----------------------------------------------------------------------------------
 void Controller::setScore(int score)
 {
 	m_totalScore += score;
 }
+
 //---------------------------------------------------------------------------------
 void Controller::incStickPicked()
 {
 	m_sticksPicked ++;
 }
+
 //---------------------------------------------------------------------------------
 void Controller::setRemovable(int removable)
 {
 	m_removableSticks = removable;
 }
+
 //--------------------------------------------------------------------------------
 void Controller::decSticksLeft()
 {
