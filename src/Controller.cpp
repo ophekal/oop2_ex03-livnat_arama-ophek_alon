@@ -7,11 +7,10 @@
 
 
 //------------------------------------------------------------------------------
-//This function is responsible of opening the ifstream in order to read the
-//levels. It calls on functions that handle the game
-//This function handles with an open window. It reads the level from the file
-//and with the help of other functions it copies it to the game board, and
-//starts the game.
+// This function runs in an infinite loop while the window is open. 
+// First, it calls a function that's responsible of generating the game either
+// from an existing file or randomly. Then, it starts the game. Once the game is
+// over it prints the score.
 
 void Controller::run(sf::RenderWindow& window, bool& load, bool& musicOn)
 {
@@ -30,8 +29,9 @@ void Controller::run(sf::RenderWindow& window, bool& load, bool& musicOn)
 }
 
 //------------------------------------------------------------------------------
-//This function is responsible of setting the score and time of the game 
-//according to what has been read from the file
+// This function is responsible of setting the score and time of the game 
+// according to what has been read from the file
+
 void Controller::setData(float time, int score, int sticksPicked)
 {
 	m_totalScore = score;
@@ -65,7 +65,7 @@ void Controller::startGame(sf::RenderWindow& window,bool load, bool& musicOn)
 }
 
 //----------------------------------------------------------------------------------------
-//This function is responsible of handeling the different poll events
+// This function is responsible of handeling the different poll events
 
 void Controller::windowPollEvent(sf::RenderWindow& window, bool& musicOn)
 {
@@ -82,7 +82,6 @@ void Controller::windowPollEvent(sf::RenderWindow& window, bool& musicOn)
 		}
 	}
 }
-
 
 //----------------------------------------------------------------------------------------
 void Controller::print(sf::RenderWindow& window)
@@ -103,12 +102,13 @@ void Controller::handleClick(const sf::Event::MouseButtonEvent& event,
 	handleClickInfoBar(window,location, musicOn);
 	handleClickBoard(window,location);
 }
+
 //---------------------------------------------------------------------------------------
 void Controller::handleClickBoard(sf::RenderWindow& window,const sf::Vector2f& location)
 {
 	//checking if we're inside the board
-	if (location.y >= 0 && location.y <= 950 &&	                  
-		location.x >= 450 && location.x <= 1500)						
+	if (location.y >= BOARD_START_Y && location.y <= WINDOW_HEIGHT &&
+		location.x >= BOARD_START_X && location.x <= WINDOW_WIDTH)
 	{
 		m_board.checkIfPressedOnStick(window, *this,location);
 	}
@@ -119,7 +119,7 @@ void Controller::handleClickInfoBar(sf::RenderWindow& window,const sf::Vector2f&
 	bool pressedSave = false;
 	bool pressedHint = false;
 
-	//checking if we're in the tool bar
+	//checking if we're in the infobar
 	if (location.y >= 0 && location.y <= 950  &&	
 		location.x >= 0 && location.x <= 450)						
 	{

@@ -29,7 +29,7 @@ private:
 
 	std::vector<sf::Texture> m_objectsTextures;
 	std::vector<sf::Texture> m_backgroundsTextures;	//menu, infobar, window
-	std::vector<sf::Texture> m_infoBarTextures;	//menu, infobar, window
+	std::vector<sf::Texture> m_infoBarTextures;		//menu, infobar, window
 
 	sf::Font m_font;
 	sf::Music m_gameMusic;

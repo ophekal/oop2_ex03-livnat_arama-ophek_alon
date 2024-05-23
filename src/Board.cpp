@@ -24,7 +24,9 @@ Board::Board()
 }
 
 //-------------------------------------------------------------------------------------
-//This function reads the level and inserts it into list and update all the data
+// This function checks if the user wants to upload a saved game.
+// If the user pressed on "load game" it calls on a function that reads the level and
+// starts the game. If not it calls the function that generates a random game
 
 void Board::readTheLevelAndUpdateData(Controller& controller, bool& load)
 {
@@ -77,18 +79,18 @@ void Board::loadAndRunFromExisting(Controller& controller, bool& load)
 			addStickToList(stick);
 		}
 	}
+
+	// calling the function that updates the removabe multimap
 	updateRemoveable();
 	updateControllerData(controller, time, score, sticksPicked);
 }
 
 //-------------------------------------------------------------------------------------
-//This function is responsoble of creating the level randomly
+// This function is responsoble of creating a random level
+
 void Board::generateGame(Controller& controller)
 {
-	// Calculate the total area of the board of docks
-	float boardArea = (BOARD_WID * BOARD_HIG )/ 10000.0f;
-
-	// Generate a random number of sticks proportional to the size of the board
+	// Generate a random number of sticks
 	int numSticks = randomFloat(15, 45);
 
 	// Create the sticks and insert them into the list
@@ -97,17 +99,16 @@ void Board::generateGame(Controller& controller)
 		createRandomStick();		
 	}
 
-	//after create the list check for the removeable sticks
+	// after creating the list update the multimap that holds the removeable sticks
 	updateRemoveable();	
 
 	float time = m_sticks.size() >= 30 ? LONG_LEVEL : SHORT_LEVEL;
-
 	updateControllerData(controller, time, 0, 0);
 }
+
 //-------------------------------------------------------------------------------------
 void Board::createRandomStick()
 {
-
 	float x = 0, y = 0, len = 0, angle = 0;
 	int colour = 0;
 
@@ -134,7 +135,8 @@ void Board::createRandomStick()
 	
 }
 //-------------------------------------------------------------------------------------
-// Function to generate a random float in a given range
+// Function that generates a random float in a given range
+
 float Board::randomFloat(float min, float max)const
 {
 	static std::random_device rd;
@@ -144,19 +146,21 @@ float Board::randomFloat(float min, float max)const
 }
 
 //-------------------------------------------------------------------------------------
-//This function is responsible of updating the data according to what was saved in the
-//existing file
+// This function is responsible of updating the data according to what was in the
+// saved file
+
 void Board::updateControllerData(Controller& controller, float time, int score, int sticksPicked) const
 {
 	controller.setData(time, score, sticksPicked);
 }
+
 //------------------------------------------------------------------------------------
 int Board::getRemovableSticks()const
 {
 	return m_removeable.size();
 }
+
 //-------------------------------------------------------------------------------------
-//This function is responsible of adding the stick to the list of sticks
 void Board::addStickToList(Stick& stick)
 {	
 	m_sticks.push_back(stick);
@@ -171,6 +175,9 @@ void Board::addStickToList(Stick& stick)
 	}
 }
 //-----------------------------------------------------------------------------
+// This function goes over the sticks and ccheck per stick if it's free, if so
+// it adds it to the removeable multimap
+ 
 void Board::updateRemoveable()
 {
 	//go over the list and check for the removeable sticks
@@ -184,17 +191,18 @@ void Board::updateRemoveable()
 }
 
 //-----------------------------------------------------------------------------
-//after the function delete the stick from the list
+// This function is responsible of updating all the relevant data structures
+// once a stick is being removed
+
 void Board::updateDataAndDeleteStick( std::list<Stick>::reverse_iterator& needToRemoveIt)
 {
-	// change the sticks that this stick blocked
 	needToRemoveIt->handleStickRemove(m_removeable);
-
-	// update the multimap - delete the pointer to the stick 
 	deleteStick(needToRemoveIt);
 }
+
 //-----------------------------------------------------------------------------
-// remove the object you want to delete
+// This function is responsible of removing the stick from the removeable
+// multimap and sticks list
 
 void Board::deleteStick(std::list<Stick>::reverse_iterator& needToRemoveIt)
 {
@@ -235,12 +243,9 @@ void Board::handlePressedSave(int score,float levelTime, int sticksPicked) const
 	}
 
 	boardFile.open("level.txt");
-	
-	// try and catch
 	if (boardFile.is_open())
 	{
 		saveBoardAndCopyToText(boardFile, score, levelTime, sticksPicked);
-		//levelExists = true;
 	}
 }
 
@@ -259,12 +264,16 @@ void Board::saveBoardAndCopyToText(std::ofstream& boardFile, int score, float le
 	}
 
 }
-//-----------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------
 int Board::getNumOfSticks()const
 {
 	return m_sticks.size();
 }
-//-----------------------------------------------------------------------------
+
+//---------------------------------------------------------------------------------------
+// This function loops through the removeable multimap and higlights them one by one 
+// according to there value
+ 
 void Board::handlePressedHint(sf::RenderWindow& window, Controller& controller)
 {
 	for (auto it = m_removeable.rbegin(); it != m_removeable.rend(); it++)
@@ -278,10 +287,11 @@ void Board::handlePressedHint(sf::RenderWindow& window, Controller& controller)
 	}
 }
 
-//-----------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------
+// This function goes over the stick list and check if we pressed one of them
+
 void Board::checkIfPressedOnStick(sf::RenderWindow& window, Controller& controller, const sf::Vector2f& location)
 {
-	//go over the sticks list and check if we pressed one of them
 	for (auto it = m_sticks.rbegin(); it != m_sticks.rend(); it++)
 	{
 		if (it->pressed(location) && it->isFree() )
@@ -302,6 +312,7 @@ void Board::checkIfPressedOnStick(sf::RenderWindow& window, Controller& controll
 		}
 	}
 }
+
 //-------------------------------------------------------------------------------
 
 void Board::highlightBlockingSticks(sf::RenderWindow& window,Controller& controller, Stick& stick)
