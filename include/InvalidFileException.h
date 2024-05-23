@@ -1,11 +1,12 @@
 #include <exception>
+#include <string>
 
-class invalidFileException : public std::exception
+class InvalidFileException : public std::exception
 {
 public:
-	//invalidFileException(char* name);
-	//virtual const char* what() const noexcept override;
+	InvalidFileException(std::string name);
+	virtual const char* what() const noexcept override;
 
 private:
-	//char* m_fileName;
+	std::string m_fileName;
 };

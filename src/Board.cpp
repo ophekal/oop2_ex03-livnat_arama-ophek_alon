@@ -29,7 +29,15 @@ void Board::readTheLevelAndUpdateData(Controller& controller, bool load)
 {
 	if (load)
 	{
-		loadAndRunFromExisting(controller);
+		try 
+		{
+			loadAndRunFromExisting(controller);
+		}
+		catch (std::exception& e)
+		{
+
+		}
+		
 	}
 	else
 	{
@@ -45,53 +53,40 @@ void Board::loadAndRunFromExisting(Controller& controller)
 	int score = 0, sticksPicked = 0;      //defalut
 
 	auto file = std::ifstream("level.txt");
-	try
+
+	if (!file.is_open())
 	{
-		if (!file.is_open())
-		{
-			//throw InvalidFileException(file);
-		}
-
-		for (auto line = std::string(); std::getline(file, line); )
-		{
-			try
-			{
-				std::istringstream iss(line);
-
-
-				if (firstLine)
-				{
-					if (!(iss >> time >> score >> sticksPicked))
-					{
-						//throw  wrong input
-					}
-					//updateControllerData(controller, time, score);
-					firstLine = false;
-				}
-				else
-				{
-					float angle, x, y,len;
-					int colour;
-					if (!(iss >> colour >> angle >> len >> x >> y))
-					{
-						//throw  worng input, if range isn't good, x-y arent goot etc
-					}
-					Stick stick(HandleResources::instance().getObjectTexture(StickType(colour)), Colour(colour), angle, { x,y }, len);
-					addStickToList(stick);
-				}
-			}
-			catch (std::exception& e)
-			{
-
-			}
-		}
-		updateRemoveable();
-		updateControllerData(controller, time, score, sticksPicked);
+		throw InvalidFileException("level.txt");
 	}
-	catch (std::exception& e)
+
+	for (auto line = std::string(); std::getline(file, line); )
 	{
 
+		std::istringstream iss(line);
+
+
+		if (firstLine)
+		{
+			if (!(iss >> time >> score >> sticksPicked))
+			{
+				//throw  wrong input
+			}
+			firstLine = false;
+		}
+		else
+		{
+			float angle, x, y,len;
+			int colour;
+			if (!(iss >> colour >> angle >> len >> x >> y))
+			{
+				//throw  worng input, if range isn't good, x-y arent goot etc
+			}
+			Stick stick(HandleResources::instance().getObjectTexture(StickType(colour)), Colour(colour), angle, { x,y }, len);
+			addStickToList(stick);
+		}
 	}
+	updateRemoveable();
+	updateControllerData(controller, time, score, sticksPicked);
 }
 
 //-------------------------------------------------------------------------------------

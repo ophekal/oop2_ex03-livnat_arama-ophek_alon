@@ -1,7 +1,13 @@
 #include "InvalidFileException.h"
 #include <string>
 
-//invalidFileException::invalidFileException(char* name)
-//{
-////	strcpy(m_fileName, name);
-//}
+//-----------------------------------------------------------------------------
+InvalidFileException::InvalidFileException(std::string name)
+{
+	m_fileName = name;
+}
+//-----------------------------------------------------------------------------
+const char* InvalidFileException::what() const noexcept
+{
+
+}

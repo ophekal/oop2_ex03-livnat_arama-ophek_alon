@@ -121,7 +121,15 @@ void Menu::handleClick(sf::Event::MouseButtonEvent& event)
 	}
 	else if (m_buttons[M_LOAD].getRectangleInfoItem().getGlobalBounds().contains(location))
 	{
-		handleLoad();
+		try
+		{
+			handleLoad();
+		}
+		catch (std::exception& e)
+		{
+
+		}
+		
 	}
 }
 
