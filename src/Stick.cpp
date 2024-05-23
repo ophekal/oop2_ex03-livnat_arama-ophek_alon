@@ -240,7 +240,7 @@ void Stick::stopHighlightBlockingSticks()
 void Stick::highlightStick()
 {
     m_stick.setOutlineThickness(4.f);
-    m_stick.setOutlineColor(sf::Color::Magenta);
+    m_stick.setOutlineColor(sf::Color(117, 250, 206));
 }
 //----------------------------------------------------------------------------------
 void Stick::stopHighlightStick()
