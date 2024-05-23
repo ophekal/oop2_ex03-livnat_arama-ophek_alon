@@ -72,13 +72,14 @@ const float GAMERULES = 726;
 const sf::Vector2f BUTTON_SIZE = { 400,100 };
 const sf::Vector2f SOUND_SIZE = { 65,65 };
 
+//----------------exceptions----------------------
+const float EXCEPTIONS = 726;
 
 //-------------------board------------------------
 const float BOARD_HIG = 950;
 const float BOARD_WID = 1050;
 const float BOARD_START_X = 450;
 const float BOARD_START_Y = 0;
-
 
 //-------------------infoBar-----------------------
 const float INFO_HIG = 950;

@@ -127,7 +127,7 @@ void Menu::handleClick(sf::Event::MouseButtonEvent& event)
 		}
 		catch (std::exception& e)
 		{
-
+			handleExceptions(e.what());
 		}
 		
 	}
@@ -136,10 +136,7 @@ void Menu::handleClick(sf::Event::MouseButtonEvent& event)
 //--------------------------------------------------------------------------------------------
 void Menu::handleLoad()
 {
-	if (std::filesystem::exists("level.txt"))
-	{
-		m_load = true;
-	}
+	m_load = true;
 	startGame();
 	m_load = false;
 }
@@ -211,4 +208,9 @@ void Menu::checkMusic()
 	{
 		m_buttons[M_SOUND].updateInfoItem(*HandleResources::instance().getBackgroundTexture(B_MUTE), SOUND_X, SOUND_Y, SOUND_SIZE);
 	}
+}
+//---------------------------------------------------------------------------------------
+void Menu::handleExceptions(std::string description)
+{
+
 }

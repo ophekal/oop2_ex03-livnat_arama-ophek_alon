@@ -61,9 +61,7 @@ void Board::loadAndRunFromExisting(Controller& controller)
 
 	for (auto line = std::string(); std::getline(file, line); )
 	{
-
 		std::istringstream iss(line);
-
 
 		if (firstLine)
 		{

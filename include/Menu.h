@@ -20,10 +20,11 @@ private:
 	void checkMusic();
 	void pressedGameRules();
 	void handleLoad();
+	void handleExceptions(std::string description);
 
 	sf::RenderWindow m_window;
 	InfoItem m_buttons[5];
 	bool m_musicOn = true;
-	bool m_load = false;
+	bool m_load = false;    //save if pressed load
 };
 
