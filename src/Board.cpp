@@ -274,7 +274,7 @@ void Board::handlePressedHint(sf::RenderWindow& window, Controller& controller)
 		sf::sleep(sf::seconds(1));
 		it->second->stopHighlightStick();
 		controller.print(window);
-		sf::sleep(sf::seconds(0.5));
+		sf::sleep(sf::seconds(0.3));
 	}
 }
 
@@ -308,7 +308,7 @@ void Board::highlightBlockingSticks(sf::RenderWindow& window,Controller& control
 {
 	stick.highlightBlockingSticks();
 	controller.print(window);
-	sf::sleep(sf::seconds(1.5));
+	sf::sleep(sf::seconds(0.5));
 	stick.stopHighlightBlockingSticks();
 }
 
