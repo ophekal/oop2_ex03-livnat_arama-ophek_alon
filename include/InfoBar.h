@@ -10,18 +10,18 @@ class InfoBar
 public:
 	InfoBar();
 	void printInfoBar(sf::RenderWindow& window);
+	void setInfoBar(int score,int removableSticks, int sticksPicked, int sticksLeft, bool& musicOn);
+	void handleClick(const sf::Vector2f& location, bool& levelOver,bool& pressedSave,bool& pressedHint, bool& musicOn);
+
+private:
 	void updateScore(int score);
 	void updateRemovableSticks(int removableSticks);
 	void updateSticksPicked(int sticksPicked);
 	void updateSticksLeft(int sticksLeft);
-	void setInfoBar(int score,int removableSticks, int sticksPicked, int sticksLeft, bool& musicOn);
-	void handleClick(const sf::Vector2f& location, bool& levelOver,bool& pressedSave,bool& pressedHint, bool& musicOn);
 	void updateMusic(bool& musicOn);
 	void checkMusic(const bool& musicOn);
 
 
-
-private:
 	sf::RectangleShape m_infoBackground;    // for the background
 	sf::Text m_text;
 	std::string m_sticksPicked;

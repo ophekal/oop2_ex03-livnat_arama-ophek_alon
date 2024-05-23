@@ -31,13 +31,10 @@ InfoBar::InfoBar()
 //----------------------------------------------------------------------------------------------------------------------------
 void InfoBar::setInfoBar(int score, int removableSticks, int sticksPicked, int sticksLeft, bool& musicOn)
 {
-	//updateLife(lives);
 	updateScore(score);
 	updateRemovableSticks(removableSticks);
 	updateSticksPicked(sticksPicked);
 	updateSticksLeft(sticksLeft);
-	//updateKey(key);
-	//updateLevel(levelNum);
 	checkMusic(musicOn);
 }
 //-------------------------------------------------------------------------------------------------
