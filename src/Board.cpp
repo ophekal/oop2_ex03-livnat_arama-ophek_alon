@@ -10,6 +10,7 @@
 #include "Macros.h"
 #include <vector>
 #include "InvalidFileException.h"
+#include "WrongInputException.h"
 #include "Board.h"
 #include "Stick.h"
 #include "Controller.h"
@@ -29,15 +30,7 @@ void Board::readTheLevelAndUpdateData(Controller& controller, bool load)
 {
 	if (load)
 	{
-		try 
-		{
-			loadAndRunFromExisting(controller);
-		}
-		catch (std::exception& e)
-		{
-
-		}
-		
+		loadAndRunFromExisting(controller);
 	}
 	else
 	{
@@ -49,8 +42,8 @@ void Board::readTheLevelAndUpdateData(Controller& controller, bool load)
 void Board::loadAndRunFromExisting(Controller& controller) 
 {
 	bool firstLine = true;
-	float time = 0;  //default value
-	int score = 0, sticksPicked = 0;      //defalut
+	float time = 0;						  //default value
+	int score = 0, sticksPicked = 0;      //defalut value
 
 	auto file = std::ifstream("level.txt");
 
@@ -67,7 +60,7 @@ void Board::loadAndRunFromExisting(Controller& controller)
 		{
 			if (!(iss >> time >> score >> sticksPicked))
 			{
-				//throw  wrong input
+				throw  WrongInputException();
 			}
 			firstLine = false;
 		}
@@ -77,7 +70,7 @@ void Board::loadAndRunFromExisting(Controller& controller)
 			int colour;
 			if (!(iss >> colour >> angle >> len >> x >> y))
 			{
-				//throw  worng input, if range isn't good, x-y arent goot etc
+				throw  WrongInputException();
 			}
 			Stick stick(HandleResources::instance().getObjectTexture(StickType(colour)), Colour(colour), angle, { x,y }, len);
 			addStickToList(stick);
