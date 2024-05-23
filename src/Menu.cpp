@@ -127,7 +127,8 @@ void Menu::handleClick(sf::Event::MouseButtonEvent& event)
 		}
 		catch (std::exception& e)
 		{
-			handleExceptions(e.what());
+			const char* description = e.what();
+			handleExceptions(std::string(description));
 		}
 		
 	}
@@ -212,5 +213,36 @@ void Menu::checkMusic()
 //---------------------------------------------------------------------------------------
 void Menu::handleExceptions(std::string description)
 {
+	std::string str = description; 
+	auto exceptionWindow = sf::RenderWindow(sf::VideoMode(EXCEPTIONS_WID, EXCEPTIONS_HIG), "ERROR");
+
+	sf::Text text;
+	text.setFont(*HandleResources::instance().getFont());
+	text.setString(description);
+	text.setCharacterSize(INFOBAR_TEXT_SIZE);
+	text.setFillColor(sf::Color::Black);
+	
+	//Set the position of the text to be centered within the rectangle
+	sf::FloatRect textBounds = text.getLocalBounds();
+	text.setPosition(50, 50);
+
+	HandleResources::instance().playSound(G_BLOCKED);
+
+	while (exceptionWindow.isOpen())
+	{
+		exceptionWindow.clear(sf::Color::White);
+		exceptionWindow.draw(text);
+		exceptionWindow.display();
+
+		if (auto event = sf::Event{}; exceptionWindow.waitEvent(event))
+		{
+			switch (event.type)
+			{
+			case sf::Event::Closed:
+				exceptionWindow.close();
+				break;
+			}
+		}
+	}
 
 }

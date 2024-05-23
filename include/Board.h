@@ -14,7 +14,7 @@ class Board
 {
 public:
 	Board();
-	void readTheLevelAndUpdateData(Controller& controller, bool load);
+	void readTheLevelAndUpdateData(Controller& controller, bool& load);
 	void printBoard(sf::RenderWindow& window);
 	void handlePressedSave(int scorefloat, float levelTime, int sticksPicked) const;
 	void handlePressedHint(sf::RenderWindow& window, Controller& controller);
@@ -23,7 +23,7 @@ public:
 	void checkIfPressedOnStick(sf::RenderWindow& window, Controller& controller, const sf::Vector2f& location);
 
 private:
-	void loadAndRunFromExisting(Controller& controller);
+	void loadAndRunFromExisting(Controller& controller, bool& load);
 	void generateGame(Controller& controller);
 	void createRandomStick();
 	void updateControllerData(Controller& controller, float time, int score, int sticksPicked) const;

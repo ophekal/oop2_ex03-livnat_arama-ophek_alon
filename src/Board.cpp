@@ -26,11 +26,11 @@ Board::Board()
 //-------------------------------------------------------------------------------------
 //This function reads the level and inserts it into list and update all the data
 
-void Board::readTheLevelAndUpdateData(Controller& controller, bool load)
+void Board::readTheLevelAndUpdateData(Controller& controller, bool& load)
 {
 	if (load)
 	{
-		loadAndRunFromExisting(controller);
+		loadAndRunFromExisting(controller, load);
 	}
 	else
 	{
@@ -39,7 +39,7 @@ void Board::readTheLevelAndUpdateData(Controller& controller, bool load)
 }
 
 //-------------------------------------------------------------------------------------
-void Board::loadAndRunFromExisting(Controller& controller) 
+void Board::loadAndRunFromExisting(Controller& controller, bool& load)
 {
 	bool firstLine = true;
 	float time = 0;						  //default value
@@ -49,7 +49,8 @@ void Board::loadAndRunFromExisting(Controller& controller)
 
 	if (!file.is_open())
 	{
-		throw InvalidFileException("level.txt");
+		load = false;
+		throw InvalidFileException();
 	}
 
 	for (auto line = std::string(); std::getline(file, line); )

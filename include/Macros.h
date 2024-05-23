@@ -73,7 +73,8 @@ const sf::Vector2f BUTTON_SIZE = { 400,100 };
 const sf::Vector2f SOUND_SIZE = { 65,65 };
 
 //----------------exceptions----------------------
-const float EXCEPTIONS = 726;
+const float EXCEPTIONS_WID = 650;
+const float EXCEPTIONS_HIG = 150;
 
 //-------------------board------------------------
 const float BOARD_HIG = 950;
