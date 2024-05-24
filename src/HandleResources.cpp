@@ -1,8 +1,8 @@
 
-#include "HandleResources.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <memory>
+#include "HandleResources.h"
 #include "Macros.h"
 
 
@@ -27,6 +27,8 @@ HandleResources& HandleResources::instance()
 }
 
 //------------------------------------------------------------------------
+// This function updates the objects texture vector
+
 void HandleResources::updateObjectVector()
 {
 	m_objectsTextures.resize(5);

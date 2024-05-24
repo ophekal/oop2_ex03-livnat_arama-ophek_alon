@@ -1,9 +1,10 @@
 
-#include "Controller.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "HandleResources.h"
 #include "Clock.h"
+#include "Controller.h"
+
 
 
 //------------------------------------------------------------------------------
@@ -186,6 +187,9 @@ void Controller::incStickPicked()
 }
 
 //---------------------------------------------------------------------------------
+// This function updates the number of sticks that can be removed currently
+// according to the int value sent
+
 void Controller::setRemovable(int removable)
 {
 	m_removableSticks = removable;

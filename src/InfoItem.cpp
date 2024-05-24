@@ -1,8 +1,8 @@
 
-#include "InfoItem.h"
+#include <SFML/Graphics.hpp>
 #include <string.h>
 #include "HandleResources.h"
-#include <SFML/Graphics.hpp>
+#include "InfoItem.h"
 
 //---------------------------------------------------------------------------------------
 InfoItem::InfoItem()
@@ -12,6 +12,9 @@ InfoItem::InfoItem()
 }
 
 //---------------------------------------------------------------------------------------
+// This function is responsible of updating the size position and texture of the buttons
+// and information that appear in the infobar
+
 void InfoItem::updateInfoItem(const sf::Texture& background, float x, float y,
                               const sf::Vector2f size)
 {

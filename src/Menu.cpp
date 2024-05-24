@@ -1,16 +1,16 @@
 
-#include "Menu.h"
 #include <vector>
 #include <string.h>
 #include <fstream>
-#include "Macros.h"
 #include <SFML/Graphics.hpp>
-#include "Controller.h"
-#include "HandleResources.h"
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
 #include <filesystem>
+#include "Menu.h"
+#include "Macros.h"
+#include "Controller.h"
+#include "HandleResources.h"
 
 //--------------------------------------------------------------------------------------------
 Menu::Menu()
@@ -20,6 +20,9 @@ Menu::Menu()
 }
 
 //--------------------------------------------------------------------------------------------
+// This function is responsible of starting the game by opening the window. Then, as long as
+// the window is open it waits for events
+  
 void Menu::run()
 {
 	HandleResources::instance().playMusic();
@@ -104,7 +107,7 @@ void Menu::handleClick(sf::Event::MouseButtonEvent& event)
 
 	if (m_buttons[M_START].getRectangleInfoItem().getGlobalBounds().contains(location))
 	{
-		startGame();	//calls on controller and starts the game
+		startGame();	// calls on controller and starts the game
 	}
 	else if (m_buttons[M_EXIT].getRectangleInfoItem().getGlobalBounds().contains(location))
 	{
@@ -117,7 +120,7 @@ void Menu::handleClick(sf::Event::MouseButtonEvent& event)
 	}
 	else if (m_buttons[M_RULES].getRectangleInfoItem().getGlobalBounds().contains(location))
 	{
-		pressedGameRules();	//creates a window that explains the game
+		pressedGameRules();	// creates a window that explains the game
 	}
 	else if (m_buttons[M_LOAD].getRectangleInfoItem().getGlobalBounds().contains(location))
 	{
@@ -141,6 +144,7 @@ void Menu::handleLoad()
 	startGame();
 	m_load = false;
 }
+
 //--------------------------------------------------------------------------------------------
 void Menu::pressedGameRules()
 {
@@ -210,7 +214,11 @@ void Menu::checkMusic()
 		m_buttons[M_SOUND].updateInfoItem(*HandleResources::instance().getBackgroundTexture(B_MUTE), SOUND_X, SOUND_Y, SOUND_SIZE);
 	}
 }
+
 //---------------------------------------------------------------------------------------
+// This function handles the exceptions that have been caught. It creates a window and
+// displays the error that occurred
+
 void Menu::handleExceptions(std::string description)
 {
 	std::string str = description; 
@@ -222,7 +230,7 @@ void Menu::handleExceptions(std::string description)
 	text.setCharacterSize(INFOBAR_TEXT_SIZE);
 	text.setFillColor(sf::Color::Black);
 	
-	//Set the position of the text to be centered within the rectangle
+	// Set the position of the text within the rectangle
 	sf::FloatRect textBounds = text.getLocalBounds();
 	text.setPosition(50, 50);
 

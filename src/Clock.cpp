@@ -1,9 +1,9 @@
 
+#include <SFML/Graphics.hpp>
+#include <string>
 #include "Clock.h"
 #include "InfoItem.h"
 #include "HandleResources.h"
-#include <SFML/Graphics.hpp>
-#include <string>
 
 //------------------------------------------------------------------------
 // This function sets the clock data

@@ -1,13 +1,14 @@
 
-#include "InfoBar.h"
 #include <SFML/Graphics.hpp>
 #include "Macros.h"
 #include "HandleResources.h"
+#include "InfoBar.h"
 
 //----------------------------------------------------------------------------------------------------------------------------
 InfoBar::InfoBar()
 	:m_infoBackground(sf::Vector2f(INFO_WID, INFO_HIG))
 {
+	// setting the position of the infobar
 	m_infoBackground.setPosition({ INFO_START_X ,INFO_START_Y });
 	m_infoBackground.setTexture(HandleResources::instance().getBackgroundTexture(B_INFOBAR));
 
@@ -55,7 +56,7 @@ void InfoBar::updateSticksLeft(int sticksLeft)
 	m_sticksLeft = std::to_string(sticksLeft);
 	m_infoBar[5].setText(m_sticksLeft);
 }
-//----------------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------
 void InfoBar::printInfoBar(sf::RenderWindow& window)
 {
 	window.draw(m_infoBackground);
@@ -64,7 +65,7 @@ void InfoBar::printInfoBar(sf::RenderWindow& window)
 	sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
 	sf::Vector2f mousePosF(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y));
 
-	//increase the buttons when mouse ontop
+	// loop for increasing the buttons when the mouse is ontop of them
 	for (int i = 6; i < 8; i++)
 	{
 		sf::RectangleShape& button = m_infoBar[i].getRectangleInfoItem();
@@ -86,15 +87,16 @@ void InfoBar::printInfoBar(sf::RenderWindow& window)
 	}
 }
 
-//----------------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------
 void InfoBar::updateScore(int score)
 {
 	m_score = std::to_string(score);
 	m_infoBar[0].setText(m_score);
 }
 
-//----------------------------------------------------------------------------------------------------------------------------
-void InfoBar::handleClick(const sf::Vector2f& location, bool& levelOver,bool& pressedSave,bool& pressedHint, bool& musicOn)
+//----------------------------------------------------------------------------------
+void InfoBar::handleClick(const sf::Vector2f& location, bool& levelOver,
+						  bool& pressedSave,bool& pressedHint, bool& musicOn)
 {
 	if (m_infoBar[2].getRectangleInfoItem().getGlobalBounds().contains(location))
 	{

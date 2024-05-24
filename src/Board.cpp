@@ -7,8 +7,8 @@
 #include <exception>
 #include <stdexcept>
 #include <random>
-#include "Macros.h"
 #include <vector>
+#include "Macros.h"
 #include "InvalidFileException.h"
 #include "WrongInputException.h"
 #include "Board.h"
